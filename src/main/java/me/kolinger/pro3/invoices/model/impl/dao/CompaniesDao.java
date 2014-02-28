@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * @author Tomáš Kolinger <tomas@kolinger.name>
@@ -17,10 +19,10 @@ public class CompaniesDao extends DeletableDao<Company> {
         super(Company.class);
     }
 
-    @Override
-    protected Criteria createCriteria() {
-        Criteria criteria = super.createCriteria();
+    @SuppressWarnings("unchecked")
+    public List<Company> findAll() {
+        Criteria criteria = createCriteria();
         criteria.addOrder(Order.asc("name"));
-        return criteria;
+        return (List<Company>) criteria.list();
     }
 }
