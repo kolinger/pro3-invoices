@@ -31,12 +31,12 @@ public class GlobalBean extends AbstractBean {
 
         item = new MenuItem();
         item.setValue(Translator.translate("public.registration.navigation_title"));
-        item.setUrl("/registration");
+        item.setUrl("/registration/");
         menu.addMenuItem(item);
 
         item = new MenuItem();
         item.setValue(Translator.translate("public.login.navigation_title"));
-        item.setUrl("/login");
+        item.setUrl("/login/");
         menu.addMenuItem(item);
 
         return menu;

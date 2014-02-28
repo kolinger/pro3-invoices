@@ -18,7 +18,7 @@
         <p>
             <h:outputText value="#{msg['layout.logged']} #{protectedGlobalBean.loggedManager.username}" />
             |
-            <h:outputLink value="/public/logout">
+            <h:outputLink value="#{request.contextPath}/protected/logout/">
                 <h:outputText value="#{msg['layout.logout']}" />
             </h:outputLink>
         </p>

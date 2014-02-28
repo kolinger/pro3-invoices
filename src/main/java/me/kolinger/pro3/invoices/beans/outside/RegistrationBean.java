@@ -53,7 +53,7 @@ public class RegistrationBean extends AbstractBean {
     public void saveEntity() {
         managerService.save(entity);
         cleanEntity();
-        redirect("/registration/success");
+        redirect("/registration/success/");
     }
 
     public void uniqueUsernameValidator(FacesContext context, UIComponent toValidate, Object value) {

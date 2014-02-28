@@ -11,53 +11,48 @@
     </url-mapping>
 
     <url-mapping>
-        <pattern value="/registration" />
+        <pattern value="/registration/" />
         <view-id value="/public/registration/form.xhtml" />
     </url-mapping>
     <url-mapping>
-        <pattern value="/registration/success" />
+        <pattern value="/registration/success/" />
         <view-id value="/public/registration/success.xhtml" />
     </url-mapping>
 
     <url-mapping>
-        <pattern value="/login" />
+        <pattern value="/login/" />
         <view-id value="/public/login.xhtml" />
     </url-mapping>
 
     <!-- ******************************* protected ******************************* -->
 
     <url-mapping>
-        <pattern value="/protected/companies" />
+        <pattern value="/protected/companies/" />
         <view-id value="/protected/companies.xhtml" />
     </url-mapping>
 
     <url-mapping>
-        <pattern value="/protected/permissions" />
+        <pattern value="/protected/permissions/" />
         <view-id value="/protected/permissions.xhtml" />
     </url-mapping>
 
     <url-mapping>
-        <pattern value="/protected/clients" />
+        <pattern value="/protected/clients/" />
         <view-id value="/protected/clients.xhtml" />
     </url-mapping>
 
     <url-mapping>
-        <pattern value="/protected/invoices" />
-        <view-id value="/protected/invoices/main.xhtml" />
-    </url-mapping>
-    <url-mapping>
-        <pattern value="/protected/invoices/preview/#{id}" />
-        <view-id value="/protected/invoices/preview.xhtml" />
-        <!--<action>#{invoicesBean.fillEntity}</action>-->
+        <pattern value="/protected/invoices/" />
+        <view-id value="/protected/invoices.xhtml" />
     </url-mapping>
 
     <url-mapping>
-        <pattern value="/protected/products" />
+        <pattern value="/protected/products/" />
         <view-id value="/protected/products.xhtml" />
     </url-mapping>
 
     <url-mapping>
-        <pattern value="/protected/payments" />
+        <pattern value="/protected/payments/" />
         <view-id value="/protected/payments.xhtml" />
     </url-mapping>
 </pretty-config>
