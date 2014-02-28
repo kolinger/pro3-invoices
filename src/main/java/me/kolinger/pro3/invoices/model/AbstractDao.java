@@ -103,15 +103,6 @@ public abstract class AbstractDao<T> extends LoggedObject {
             filter.applyFilters(criteria);
         }
 
-        // ORDER
-        if (sortField != null) {
-            if (sortOrder == SortOrder.ASCENDING) {
-                criteria.addOrder(Order.asc(sortField));
-            } else if (sortOrder == SortOrder.DESCENDING) {
-                criteria.addOrder(Order.desc(sortField));
-            }
-        }
-
         // additional criteria
         applyDataTableCriteria(criteria);
 
@@ -162,19 +153,6 @@ public abstract class AbstractDao<T> extends LoggedObject {
         // WHERE
         if (filter != null) {
             filter.applyFilters(criteria);
-        }
-
-        // ORDER
-        if (multiSortMeta != null) {
-            for (SortMeta sort : multiSortMeta) {
-                if (sort.getSortField() != null) {
-                    if (sort.getSortOrder() == SortOrder.ASCENDING) {
-                        criteria.addOrder(Order.asc(sort.getSortField()));
-                    } else if (sort.getSortOrder() == SortOrder.DESCENDING) {
-                        criteria.addOrder(Order.desc(sort.getSortField()));
-                    }
-                }
-            }
         }
 
         // additional criteria
