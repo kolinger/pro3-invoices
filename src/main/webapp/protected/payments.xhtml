@@ -7,7 +7,150 @@
 
     <ui:define name="title">#{msg['protected.payments.title']}</ui:define>
 
+
     <ui:define name="content">
-        todo
+        <h:form id="buttons">
+            <p:commandButton value="#{msg['protected.payments.create']}" action="#{paymentsBean.createNewEntity}"
+                             update=":addDialog" oncomplete="addDialogWidget.show()" />
+        </h:form>
+    
+        <h:form id="list">
+            <p:dataTable var="row" value="#{paymentsBean.lazyDataModel}" sortMode="multiple" paginator="true"
+                         paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
+
+                <p:column sortBy="#{row.invoice.company.name}" headerText="#{msg['protected.payments.company']}">
+                    <h:outputText value="#{row.invoice.company.name}" />
+                </p:column>
+    
+                <p:column sortBy="#{row.invoice.id}" headerText="#{msg['protected.payments.id']}">
+                    <h:outputText value="#{row.invoice.id}" />
+                </p:column>
+    
+                <p:column sortBy="#{row.invoice.client.name}" headerText="#{msg['protected.payments.client']}">
+                    <h:outputText value="#{row.invoice.client.name}" />
+                </p:column>
+    
+                <p:column headerText="#{msg['protected.payments.amount']}">
+                    <h:outputText value="#{row.amount}" />
+                </p:column>
+    
+                <p:column sortBy="#{row.date}" headerText="#{msg['protected.payments.date']}">
+                    <h:outputText value="#{row.date}">
+                        <f:convertDateTime pattern="#{paymentsBean.dateFormat}" />
+                    </h:outputText>
+                </p:column>
+    
+                <p:column headerText="#{msg['layout.crud.actions']}">
+                    <p:commandButton onsuccess="editDialogWidget.show()" icon="ui-icon-pencil"
+                                     value="#{msg['layout.crud.edit']}"
+                                     update=":editForm" action="#{paymentsBean.selectEntity(row)}" />
+    
+                    <p:commandButton onsuccess="deleteDialogWidget.show()" icon="ui-icon-trash"
+                                     value="#{msg['layout.crud.delete']}"
+                                     update=":deleteForm" action="#{paymentsBean.selectEntity(row)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    
+        <p:dialog id="addDialog" header="#{msg['protected.payments.create_title']}" widgetVar="addDialogWidget"
+                  resizable="false" modal="true" closable="false">
+    
+            <h:form id="addForm">
+                <p:messages id="addMessages" />
+    
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.payments.id']}">
+                        <p:inputText value="#{paymentsBean.id}" required="true"
+                                     label="#{msg['protected.payments.id']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.payments.amount']}">
+                        <p:inputText value="#{paymentsBean.entity.amount}" required="true"
+                                     label="#{msg['protected.payments.amount']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.payments.date']}">
+                        <p:calendar value="#{paymentsBean.entity.date}"
+                                    label="#{msg['protected.payments.date']}"
+                                    required="true" pattern="#{paymentsBean.dateFormat}" />
+                    </p:outputLabel>
+    
+                    <p:outputLabel value="#{msg['protected.payments.comment']}">
+                        <p:inputTextarea value="#{paymentsBean.entity.comment}"
+                                         label="#{msg['protected.payments.comment']}" />
+                    </p:outputLabel>
+    
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list addMessages"
+                                         oncomplete="handleClose(xhr, status, args, addDialogWidget)"
+                                         action="#{paymentsBean.saveEntity}" />
+    
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="addDialogWidget.hide()"
+                                         action="#{paymentsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    
+        <p:dialog id="editDialog" header="#{msg['protected.payments.edit_title']}" widgetVar="editDialogWidget"
+                  resizable="false" modal="true" closable="false">
+    
+            <h:form id="editForm">
+                <p:messages id="editMessages" />
+    
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.payments.id']}">
+                        <h:outputText value="#{paymentsBean.entity.invoice.id}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.payments.amount']}">
+                        <p:inputText value="#{paymentsBean.entity.amount}" required="true"
+                                     label="#{msg['protected.payments.amount']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.payments.date']}">
+                        <p:calendar value="#{paymentsBean.entity.date}"
+                                    label="#{msg['protected.payments.date']}"
+                                    required="true" pattern="#{paymentsBean.dateFormat}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.payments.comment']}">
+                        <p:inputTextarea value="#{paymentsBean.entity.comment}"
+                                         label="#{msg['protected.payments.comment']}" />
+                    </p:outputLabel>
+    
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list :editForm editMessages"
+                                         oncomplete="handleClose(xhr, status, args, editDialogWidget)"
+                                         action="#{paymentsBean.saveEntity}" />
+    
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="editDialogWidget.hide()" action="#{paymentsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    
+        <p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
+                  resizable="false" modal="true" closable="false">
+    
+            <h:form id="deleteForm">
+                <p:panelGrid columns="1">
+                    <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
+                    <h:outputText value="#{msg['protected.payments.id']} #{paymentsBean.entity.id}" />
+    
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.yes']}" update=":list :deleteForm"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{paymentsBean.deleteEntity}" />
+    
+                        <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{paymentsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 </ui:composition>
