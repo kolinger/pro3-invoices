@@ -1,15 +1,16 @@
 package me.kolinger.pro3.invoices.model;
 
+import me.kolinger.pro3.invoices.common.LoggedObject;
+import me.kolinger.pro3.invoices.model.filter.AbstractFilter;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import me.kolinger.pro3.invoices.common.LoggedObject;
-import me.kolinger.pro3.invoices.model.filter.AbstractFilter;
 
 import java.util.List;
 
@@ -94,6 +95,31 @@ public abstract class AbstractDao<T> extends LoggedObject {
     }
 
     @SuppressWarnings("unchecked")
+    public Integer count(String sortField, SortOrder sortOrder, AbstractFilter filter) {
+        Criteria criteria = createCriteria();
+
+        // WHERE
+        if (filter != null) {
+            filter.applyFilters(criteria);
+        }
+
+        // ORDER
+        if (sortField != null) {
+            if (sortOrder == SortOrder.ASCENDING) {
+                criteria.addOrder(Order.asc(sortField));
+            } else if (sortOrder == SortOrder.DESCENDING) {
+                criteria.addOrder(Order.desc(sortField));
+            }
+        }
+
+        // additional criteria
+        applyDataTableCriteria(criteria);
+
+        criteria.setProjection(Projections.rowCount());
+        return (Integer) criteria.uniqueResult();
+    }
+
+    @SuppressWarnings("unchecked")
     public List<T> findAll(int first, int pageSize, List<SortMeta> multiSortMeta, AbstractFilter filter) {
         Criteria criteria = createCriteria();
 
@@ -127,6 +153,35 @@ public abstract class AbstractDao<T> extends LoggedObject {
         applyDataTableCriteria(criteria);
 
         return (List<T>) criteria.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public Integer count(List<SortMeta> multiSortMeta, AbstractFilter filter) {
+        Criteria criteria = createCriteria();
+
+        // WHERE
+        if (filter != null) {
+            filter.applyFilters(criteria);
+        }
+
+        // ORDER
+        if (multiSortMeta != null) {
+            for (SortMeta sort : multiSortMeta) {
+                if (sort.getSortField() != null) {
+                    if (sort.getSortOrder() == SortOrder.ASCENDING) {
+                        criteria.addOrder(Order.asc(sort.getSortField()));
+                    } else if (sort.getSortOrder() == SortOrder.DESCENDING) {
+                        criteria.addOrder(Order.desc(sort.getSortField()));
+                    }
+                }
+            }
+        }
+
+        // additional criteria
+        applyDataTableCriteria(criteria);
+
+        criteria.setProjection(Projections.rowCount());
+        return ((Long) criteria.uniqueResult()).intValue();
     }
 
     /**

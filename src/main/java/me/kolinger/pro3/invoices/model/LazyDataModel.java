@@ -41,13 +41,13 @@ public class LazyDataModel<T> extends org.primefaces.model.LazyDataModel<T> {
 
     public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {
         List<T> list = service.findAll(first, pageSize, sortField, sortOrder, filter);
-        setRowCount(list.size());
+        setRowCount(service.count(sortField, sortOrder, filter));
         return list;
     }
 
     public List<T> load(int first, int pageSize, List<SortMeta> multiSortMeta, Map<String,String> filters) {
         List<T> list = service.findAll(first, pageSize, multiSortMeta, filter);
-        setRowCount(list.size());
+        setRowCount(service.count(multiSortMeta, filter));
         return list;
     }
 }
