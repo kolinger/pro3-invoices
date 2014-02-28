@@ -6,9 +6,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +23,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "invoices")
-public class Invoice extends DeletableEntity {
+public class Invoice implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoice_seq")
+    @SequenceGenerator(name = "invoice_seq", sequenceName = "invoice_seq", initialValue = 1000000000, allocationSize = 1)
+    private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
     private List<InvoiceProduct> products = new ArrayList<InvoiceProduct>();
@@ -43,6 +53,17 @@ public class Invoice extends DeletableEntity {
 
     @Column(columnDefinition = "TEXT")
     private String comment;
+
+    @Column(nullable = false)
+    private Boolean deleted = false;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public List<InvoiceProduct> getProducts() {
         return products;
@@ -106,6 +127,29 @@ public class Invoice extends DeletableEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Invoice that = (Invoice) o;
+
+        return !(id != null ? !id.equals(that.id) : that.id != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     public enum Type {
