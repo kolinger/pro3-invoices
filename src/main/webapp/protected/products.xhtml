@@ -8,6 +8,172 @@
     <ui:define name="title">#{msg['protected.products.title']}</ui:define>
 
     <ui:define name="content">
-        todo
+        <h:form id="buttons">
+            <p:commandButton value="#{msg['protected.products.create']}" action="#{productsBean.createNewEntity}"
+                             update=":addDialog" oncomplete="addDialogWidget.show()" />
+        </h:form>
+
+        <h:form id="list">
+            <p:dataTable var="row" value="#{productsBean.lazyDataModel}" sortMode="multiple" paginator="true"
+                         paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
+
+                <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.products.company']}">
+                    <h:outputText value="#{row.company.name}" />
+                </p:column>
+
+                <p:column sortBy="#{row.name}" headerText="#{msg['protected.products.name']}">
+                    <h:outputText value="#{row.name}" />
+                </p:column>
+
+                <p:column sortBy="#{row.count}" headerText="#{msg['protected.products.count']}">
+                    <h:outputText value="#{row.count}" rendered="#{row.count ge 0}" />
+                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.count lt 0}" />
+                </p:column>
+
+                <p:column sortBy="#{row.price}" headerText="#{msg['protected.products.price']}">
+                    <h:outputText value="#{row.price}" rendered="#{row.price ge 0}" />
+                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.price lt 0}" />
+                </p:column>
+
+                <p:column sortBy="#{row.tax}" headerText="#{msg['protected.products.tax']}">
+                    <h:outputText value="#{row.tax}" rendered="#{row.tax ge 0}" />
+                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.tax lt 0}" />
+                </p:column>
+
+                <p:column headerText="#{msg['layout.crud.actions']}">
+                    <p:commandButton onsuccess="editDialogWidget.show()" icon="ui-icon-pencil"
+                                     value="#{msg['layout.crud.edit']}"
+                                     update=":editForm" action="#{productsBean.selectEntity(row)}" />
+
+                    <p:commandButton onsuccess="deleteDialogWidget.show()" icon="ui-icon-trash"
+                                     value="#{msg['layout.crud.delete']}"
+                                     update=":deleteForm" action="#{productsBean.selectEntity(row)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog id="addDialog" header="#{msg['protected.products.create_title']}" widgetVar="addDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="addForm">
+                <p:messages id="addMessages" for="addForm" />
+
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.products.company']}">
+                        <p:selectOneMenu value="#{productsBean.entity.company}"
+                                         converter="#{companyTypeConverter}"
+                                         label="#{msg['protected.products.company']}">
+
+                            <f:selectItems value="#{productsBean.companies}" var="company"
+                                           itemLabel="#{company.name}" itemValue="#{company}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.name']}">
+                        <p:inputText value="#{productsBean.entity.name}" label="#{msg['protected.products.name']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.count']}">
+                        <p:inputText value="#{productsBean.entity.count}" label="#{msg['protected.products.count']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.price']}">
+                        <p:inputText value="#{productsBean.entity.price}" label="#{msg['protected.products.price']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.tax']}">
+                        <p:inputText value="#{productsBean.entity.tax}" label="#{msg['protected.products.tax']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.comment']}">
+                        <p:inputTextarea value="#{productsBean.entity.comment}"
+                                         label="#{msg['protected.products.comment']}" />
+                    </p:outputLabel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list addMessages"
+                                         oncomplete="handleClose(xhr, status, args, addDialogWidget)"
+                                         action="#{productsBean.saveEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="addDialogWidget.hide()"
+                                         action="#{productsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="editDialog" header="#{msg['protected.products.edit_title']}" widgetVar="editDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="editForm">
+                <p:messages id="editMessages" for="editForm" />
+
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.products.company']}">
+                        <p:selectOneMenu value="#{productsBean.entity.company}"
+                                         converter="#{companyTypeConverter}"
+                                         label="#{msg['protected.products.company']}">
+
+                            <f:selectItems value="#{productsBean.companies}" var="company"
+                                           itemLabel="#{company.name}" itemValue="#{company}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.name']}">
+                        <p:inputText value="#{productsBean.entity.name}" label="#{msg['protected.products.name']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.count']}">
+                        <p:inputText value="#{productsBean.entity.count}" label="#{msg['protected.products.count']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.price']}">
+                        <p:inputText value="#{productsBean.entity.price}" label="#{msg['protected.products.price']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.tax']}">
+                        <p:inputText value="#{productsBean.entity.tax}" label="#{msg['protected.products.tax']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.products.comment']}">
+                        <p:inputTextarea value="#{productsBean.entity.comment}"
+                                         label="#{msg['protected.products.comment']}" />
+                    </p:outputLabel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list :editForm editMessages"
+                                         oncomplete="handleClose(xhr, status, args, editDialogWidget)"
+                                         action="#{productsBean.saveEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="editDialogWidget.hide()" action="#{productsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="deleteForm">
+                <p:panelGrid columns="1">
+                    <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
+                    <h:outputText value="#{msg['protected.products.name']} #{productsBean.entity.name}" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.yes']}" update=":list :deleteForm"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{productsBean.deleteEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{productsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 </ui:composition>
