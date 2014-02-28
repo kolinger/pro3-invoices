@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/public.xhtml">
+
+    <ui:define name="title">#{msg['public.registration.title']}</ui:define>
+
+    <ui:define name="content">
+        <h:form id="registrationForm">
+            <p:messages id="messages" />
+
+            <h:panelGrid columns="1" cellpadding="4">
+                <h:outputLabel value="#{msg['public.registration.username']}">
+                    <p:inputText value="#{registrationBean.entity.username}" required="true"
+                                 label="#{msg['public.registration.username']}"
+                                 validator="#{registrationBean.uniqueUsernameValidator}" />
+                </h:outputLabel>
+
+                <h:outputLabel value="#{msg['public.registration.password']}">
+                    <p:password value="#{registrationBean.password}" required="true"
+                                 label="#{msg['public.registration.password']}" match="password2"
+                                 validatorMessage="#{msg['public.registration.passwords_do_not_match']}" />
+                </h:outputLabel>
+
+                <h:outputLabel value="#{msg['public.registration.password2']}">
+                    <p:password id="password2" label="#{msg['public.registration.password']}">
+                        <f:validateLength minimum="4" />
+                    </p:password>
+                </h:outputLabel>
+
+                <f:facet name="footer">
+                    <p:commandButton value="#{msg['public.registration.send']}"
+                                     widgetVar="registerButtonWidget"
+                                     update="registrationForm messages"
+                                     onstart="registerButtonWidget.disable()"
+                                     onsuccess="registerButtonWidget.enable()"
+                                     onerror="registerButtonWidget.enable()"
+                                     actionListener="#{registrationBean.saveEntity}" />
+                </f:facet>
+            </h:panelGrid>
+
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{registrationBean.initializeEntity}"/>
+            </f:metadata>
+        </h:form>
+    </ui:define>
+</ui:composition>

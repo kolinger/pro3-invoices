@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+        <ui:insert name="title"></ui:insert></title>
+    <meta name="description" content="#{msg['layout.description']}" />
+    <meta name="author" content="Tomáš Kolinger" />
+
+    <h:outputStylesheet library="css" name="reset.css" />
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="bootstrap-theme.css" />
+    <h:outputStylesheet library="css" name="style.css" />
+
+    <h:outputScript library="js" name="modernizr-2.7.0.dev.js" />
+
+    <ui:insert name="head"></ui:insert>
+</h:head>
+<h:body>
+    <div class="container">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h1>SIS <small>simple invoices system</small></h1>
+            </div>
+            <div class="pull-right user-panel">
+                <ui:insert name="userPanel"></ui:insert>
+            </div>
+        </div>
+
+        <ui:insert name="navigation"></ui:insert>
+
+        <h2><ui:insert name="title"></ui:insert></h2>
+
+        <ui:insert name="content"></ui:insert>
+    </div>
+
+    <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade
+        to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google
+        Chrome Frame</a> to experience this site.</p><![endif]-->
+
+    <ui:insert name="js"></ui:insert>
+</h:body>
+</html>

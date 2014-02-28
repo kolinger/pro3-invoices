@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/layouts/layout.xhtml">
+
+    <ui:define name="head">
+        <ui:remove><!-- prepared for overriding --></ui:remove>
+    </ui:define>
+
+    <ui:define name="js">
+        <ui:remove><!-- prepared for overriding --></ui:remove>
+    </ui:define>
+
+    <ui:define name="userPanel">
+        <p>
+            <h:outputLink value="#{request.contextPath}/registration">
+                <h:outputText value="#{msg['layout.registration']}" />
+            </h:outputLink>
+            |
+            <h:outputLink value="#{request.contextPath}/login">
+                <h:outputText value="#{msg['layout.login']}" />
+            </h:outputLink>
+        </p>
+    </ui:define>
+
+    <ui:define name="navigation">
+        <h:form><p:menubar model="#{publicGlobalBean.menuModel}" /></h:form>
+    </ui:define>
+</ui:composition>
