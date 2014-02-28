@@ -8,6 +8,221 @@
     <ui:define name="title">#{msg['protected.companies.title']}</ui:define>
 
     <ui:define name="content">
-        todo
+        <h:form id="buttons">
+            <p:commandButton value="#{msg['protected.companies.create']}" action="#{companiesBean.createNewEntity}"
+                             update=":addDialog" oncomplete="addDialogWidget.show()" />
+        </h:form>
+
+        <h:form id="list">
+            <p:dataTable var="row" value="#{companiesBean.lazyDataModel}" sortMode="multiple" paginator="true"
+                         paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
+
+                <p:column sortBy="#{row.name}" headerText="#{msg['protected.companies.name']}">
+                    <h:outputText value="#{row.name}" />
+                </p:column>
+
+                <p:column headerText="#{msg['layout.crud.actions']}">
+                    <p:commandButton onsuccess="editDialogWidget.show()" icon="ui-icon-pencil"
+                                     value="#{msg['layout.crud.edit']}"
+                                     update=":editForm" action="#{companiesBean.selectEntity(row)}" />
+
+                    <p:commandButton onsuccess="deleteDialogWidget.show()" icon="ui-icon-trash"
+                                     value="#{msg['layout.crud.delete']}"
+                                     update=":deleteForm" action="#{companiesBean.selectEntity(row)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog id="addDialog" header="#{msg['protected.companies.create_title']}" widgetVar="addDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="addForm">
+                <p:messages id="addMessages" for="addForm" />
+
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.companies.name']}">
+                        <p:inputText value="#{companiesBean.entity.name}" label="#{msg['protected.companies.name']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.street']}">
+                        <p:inputText value="#{companiesBean.entity.street}" label="#{msg['protected.companies.street']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.city']}">
+                        <p:inputText value="#{companiesBean.entity.city}" label="#{msg['protected.companies.city']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.zip']}">
+                        <p:inputText value="#{companiesBean.entity.zip}" label="#{msg['protected.companies.zip']}"
+                                     required="true">
+                            <f:validateLength minimum="5" maximum="5" />
+                        </p:inputText>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.trade_register']}">
+                        <p:inputTextarea value="#{companiesBean.entity.tradeRegister}"
+                                         label="#{msg['protected.companies.trade_register']}" required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.company_in']}">
+                        <p:inputText value="#{companiesBean.entity.companyIn}"
+                                     label="#{msg['protected.companies.company_in']}" required="true">
+                            <f:validateLength minimum="8" maximum="8" />
+                        </p:inputText>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.vat_id']}">
+                        <p:inputText value="#{companiesBean.entity.vatId}"
+                                     label="#{msg['protected.companies.vat_id']}">
+                            <f:validateLength minimum="10" maximum="10" />
+                        </p:inputText>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.email']}">
+                        <p:inputText value="#{companiesBean.entity.email}"
+                                     label="#{msg['protected.companies.email']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.phone']}">
+                        <p:inputText value="#{companiesBean.entity.phone}"
+                                     label="#{msg['protected.companies.phone']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.website']}">
+                        <p:inputText value="#{companiesBean.entity.website}"
+                                     label="#{msg['protected.companies.website']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.bank_account']}">
+                        <p:inputText value="#{companiesBean.entity.bankAccount}"
+                                     label="#{msg['protected.companies.bank_account']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.comment']}">
+                        <p:inputTextarea value="#{companiesBean.entity.comment}"
+                                         label="#{msg['protected.companies.comment']}" />
+                    </p:outputLabel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list addMessages"
+                                         oncomplete="handleClose(xhr, status, args, addDialogWidget)"
+                                         action="#{companiesBean.saveEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="addDialogWidget.hide()"
+                                         action="#{companiesBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="editDialog" header="#{msg['protected.companies.edit_title']}" widgetVar="editDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="editForm">
+                <p:messages id="editMessages" for="editForm" />
+
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.companies.name']}">
+                        <p:inputText value="#{companiesBean.entity.name}" label="#{msg['protected.companies.name']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.street']}">
+                        <p:inputText value="#{companiesBean.entity.street}" label="#{msg['protected.companies.street']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.city']}">
+                        <p:inputText value="#{companiesBean.entity.city}" label="#{msg['protected.companies.city']}"
+                                     required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.zip']}">
+                        <p:inputText value="#{companiesBean.entity.zip}" label="#{msg['protected.companies.zip']}"
+                                     required="true">
+                            <f:validateLength minimum="5" maximum="5" />
+                         </p:inputText>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.trade_register']}">
+                        <p:inputTextarea value="#{companiesBean.entity.tradeRegister}"
+                                         label="#{msg['protected.companies.trade_register']}" required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.company_in']}">
+                        <p:inputText value="#{companiesBean.entity.companyIn}"
+                                     label="#{msg['protected.companies.company_in']}" required="true">
+                            <f:validateLength minimum="8" maximum="8" />
+                        </p:inputText>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.vat_id']}">
+                        <p:inputText value="#{companiesBean.entity.vatId}"
+                                     label="#{msg['protected.companies.vat_id']}">
+                            <f:validateLength minimum="10" maximum="10" />
+                        </p:inputText>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.email']}">
+                        <p:inputText value="#{companiesBean.entity.email}"
+                                     label="#{msg['protected.companies.email']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.phone']}">
+                        <p:inputText value="#{companiesBean.entity.phone}"
+                                     label="#{msg['protected.companies.phone']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.website']}">
+                        <p:inputText value="#{companiesBean.entity.website}"
+                                     label="#{msg['protected.companies.website']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.bank_account']}">
+                        <p:inputText value="#{companiesBean.entity.bankAccount}"
+                                     label="#{msg['protected.companies.bank_account']}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.companies.comment']}">
+                        <p:inputTextarea value="#{companiesBean.entity.comment}"
+                                         label="#{msg['protected.companies.comment']}" />
+                    </p:outputLabel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list :editForm editMessages"
+                                         oncomplete="handleClose(xhr, status, args, editDialogWidget)"
+                                         action="#{companiesBean.saveEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="editDialogWidget.hide()" action="#{companiesBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="deleteForm">
+                <p:panelGrid columns="1">
+                    <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
+                    <h:outputText value="#{msg['protected.companies.name']} #{companiesBean.entity.name}" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.yes']}" update=":list :deleteForm"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{companiesBean.deleteEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{companiesBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 </ui:composition>
