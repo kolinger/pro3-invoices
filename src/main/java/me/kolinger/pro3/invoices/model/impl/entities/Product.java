@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product extends DeletableEntity {
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Company company;
 
     @Column(nullable = false)

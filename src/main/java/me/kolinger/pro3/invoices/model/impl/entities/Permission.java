@@ -17,11 +17,11 @@ import java.io.Serializable;
 public class Permission implements Serializable {
 
     @Id
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Company company;
 
     @Id
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Manager manager;
 
     @Column(nullable = false)

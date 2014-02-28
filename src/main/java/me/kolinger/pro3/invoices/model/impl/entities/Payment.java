@@ -18,7 +18,7 @@ import java.util.Date;
 @Table(name = "payments")
 public class Payment extends DeletableEntity {
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Invoice invoice;
 
     @Column(nullable = false)

@@ -17,10 +17,10 @@ import java.math.BigDecimal;
 @Table(name = "invoice_products")
 public class InvoiceProduct extends DeletableEntity {
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Invoice invoice;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product product;
 
     @Column(nullable = false)

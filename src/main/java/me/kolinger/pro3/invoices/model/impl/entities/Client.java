@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "clients")
 public class Client extends DeletableEntity {
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Company company;
 
     @Column(nullable = false)

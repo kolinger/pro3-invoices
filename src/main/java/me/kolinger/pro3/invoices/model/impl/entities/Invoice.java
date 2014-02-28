@@ -26,20 +26,20 @@ public class Invoice extends DeletableEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
     private List<Payment> payments = new ArrayList<Payment>();
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Company company;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Client client;
 
     @Column(nullable = false)
     private Type type;
 
     @Column(nullable = false)
-    private Date createDate;
+    private Date createDate = new Date();
 
     @Column(nullable = false)
-    private Date endDate;
+    private Date endDate = new Date();
 
     @Column(columnDefinition = "TEXT")
     private String comment;
