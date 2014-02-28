@@ -1,7 +1,7 @@
 package me.kolinger.pro3.invoices.model.impl.services;
 
 import me.kolinger.pro3.invoices.common.LoggedObject;
-import me.kolinger.pro3.invoices.model.impl.dao.ManagerDao;
+import me.kolinger.pro3.invoices.model.impl.dao.ManagersDao;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,10 +20,10 @@ import java.util.List;
  */
 @Transactional
 @Service
-public class ManagerUserDetailsService extends LoggedObject implements UserDetailsService {
+public class ManagersUserDetailsService extends LoggedObject implements UserDetailsService {
 
     @Autowired
-    private ManagerDao dao;
+    private ManagersDao dao;
 
     @Override
     @Transactional(readOnly = true)

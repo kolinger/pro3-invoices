@@ -1,7 +1,7 @@
 package me.kolinger.pro3.invoices.model.impl.services;
 
 import me.kolinger.pro3.invoices.model.AbstractService;
-import me.kolinger.pro3.invoices.model.impl.dao.ManagerDao;
+import me.kolinger.pro3.invoices.model.impl.dao.ManagersDao;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service
-public class ManagerService extends AbstractService<Manager> {
+public class ManagersService extends AbstractService<Manager> {
 
-    private ManagerDao dao;
+    private ManagersDao dao;
 
-    public ManagerService() {
+    public ManagersService() {
         super();
     }
 
     @Autowired
-    public ManagerService(ManagerDao dao) {
+    public ManagersService(ManagersDao dao) {
         super(dao);
         this.dao = dao;
     }

@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
  * @author Tomáš Kolinger <tomas@kolinger.name>
  */
 @Repository
-public class ManagerDao extends DeletableDao<Manager> {
+public class ManagersDao extends DeletableDao<Manager> {
 
-    public ManagerDao() {
+    public ManagersDao() {
         super(Manager.class);
     }
 

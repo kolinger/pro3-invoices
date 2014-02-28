@@ -4,7 +4,7 @@ package me.kolinger.pro3.invoices.beans.manager;
 import me.kolinger.pro3.invoices.beans.AbstractBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
-import me.kolinger.pro3.invoices.model.impl.services.ManagerService;
+import me.kolinger.pro3.invoices.model.impl.services.ManagersService;
 import org.primefaces.component.menuitem.MenuItem;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
@@ -20,13 +20,13 @@ import org.springframework.stereotype.Component;
 public class GlobalBean extends AbstractBean {
 
     @Autowired
-    public ManagerService managerService;
+    public ManagersService managersService;
 
     private Manager loggedManager;
 
     public Manager getLoggedManager() {
         if (loggedManager == null) {
-            loggedManager = managerService.getLoggedManager();
+            loggedManager = managersService.getLoggedManager();
         }
         return loggedManager;
     }

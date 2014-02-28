@@ -3,7 +3,7 @@ package me.kolinger.pro3.invoices.beans.outside;
 import me.kolinger.pro3.invoices.beans.AbstractBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
-import me.kolinger.pro3.invoices.model.impl.services.ManagerService;
+import me.kolinger.pro3.invoices.model.impl.services.ManagersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +23,7 @@ public class RegistrationBean extends AbstractBean {
     public PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ManagerService managerService;
+    public ManagersService managersService;
 
     private Manager entity;
 
@@ -51,7 +51,7 @@ public class RegistrationBean extends AbstractBean {
     }
 
     public void saveEntity() {
-        managerService.save(entity);
+        managersService.save(entity);
         cleanEntity();
         redirect("/registration/success/");
     }
@@ -61,7 +61,7 @@ public class RegistrationBean extends AbstractBean {
             return;
         }
         String username = value.toString();
-        Manager manager = managerService.findOneByUsername(username);
+        Manager manager = managersService.findOneByUsername(username);
         if (manager != null) {
             sendValidationError(Translator.translate("public.registration.username.error_already_taken"));
         }
