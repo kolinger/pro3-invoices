@@ -1,11 +1,9 @@
 package me.kolinger.pro3.invoices.model.impl.services;
 
-import me.kolinger.pro3.invoices.model.AbstractService;
 import me.kolinger.pro3.invoices.model.impl.dao.ManagersDao;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,22 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service
-public class ManagersService extends AbstractService<Manager> {
+public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private ManagersDao dao;
 
-    public ManagersService() {
-        super();
-    }
-
     @Autowired
-    public ManagersService(ManagersDao dao) {
-        super(dao);
+    public UserDetailsService(ManagersDao dao) {
         this.dao = dao;
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public Manager findOneByUsername(String username) {
-        return dao.findOneByUsername(username);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Manager manager = dao.findOneByUsername(username);
+        if (manager == null) {
+            throw new UsernameNotFoundException("Username not found");
+        }
+        return manager;
     }
 }
