@@ -1,11 +1,10 @@
 package me.kolinger.pro3.invoices.model;
 
-import me.kolinger.pro3.invoices.model.impl.entities.Invoice;
+import me.kolinger.pro3.invoices.common.LoggedObject;
+import me.kolinger.pro3.invoices.model.filter.AbstractFilter;
 import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 import org.springframework.transaction.annotation.Transactional;
-import me.kolinger.pro3.invoices.common.LoggedObject;
-import me.kolinger.pro3.invoices.model.filter.AbstractFilter;
 
 import java.util.List;
 

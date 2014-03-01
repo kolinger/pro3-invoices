@@ -3,14 +3,10 @@ package me.kolinger.pro3.invoices.beans.manager;
 
 import me.kolinger.pro3.invoices.beans.AbstractBean;
 import me.kolinger.pro3.invoices.common.Translator;
-import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import org.primefaces.component.menuitem.MenuItem;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
