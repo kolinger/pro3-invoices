@@ -25,25 +25,22 @@ public class Permission implements Serializable {
     private Manager manager;
 
     @Column(nullable = false)
-    private Boolean roleCompany;
+    private Boolean roleCompany = false;
 
     @Column(nullable = false)
-    private Boolean rolePermissions;
+    private Boolean rolePermissions = false;
 
     @Column(nullable = false)
-    private Boolean roleClients;
+    private Boolean roleClients = false;
 
     @Column(nullable = false)
-    private Boolean roleInvoices;
+    private Boolean roleInvoices = false;
 
     @Column(nullable = false)
-    private Boolean roleProducts;
+    private Boolean roleProducts = false;
 
     @Column(nullable = false)
-    private Boolean rolePayments;
-
-    @Column(nullable = false)
-    private Boolean deleted = false;
+    private Boolean rolePayments = false;
 
     public Company getCompany() {
         return company;
@@ -109,14 +106,6 @@ public class Permission implements Serializable {
         this.rolePayments = rolePayments;
     }
 
-    public Boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,16 +113,14 @@ public class Permission implements Serializable {
 
         Permission that = (Permission) o;
 
-        return !(company == null || manager == null || !company.equals(that.getCompany()) ||
-                !manager.equals(that.getManager()));
+        return !(company != null ? !company.equals(that.company) : that.company != null) &&
+                !(manager != null ? !manager.equals(that.manager) : that.manager != null);
     }
 
     @Override
     public int hashCode() {
-        if (company == null || manager == null) {
-            return 0;
-        }
-        String id = company.getId().toString() + manager.getId().toString();
-        return id.hashCode();
+        int result = company != null ? company.hashCode() : 0;
+        result = 31 * result + (manager != null ? manager.hashCode() : 0);
+        return result;
     }
 }

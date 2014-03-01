@@ -8,6 +8,196 @@
     <ui:define name="title">#{msg['protected.permissions.title']}</ui:define>
 
     <ui:define name="content">
-        todo
+        <h:form id="buttons">
+            <p:commandButton value="#{msg['protected.permissions.create']}" action="#{permissionsBean.createNewEntity}"
+                             update=":addDialog" oncomplete="addDialogWidget.show()" />
+        </h:form>
+
+        <h:form id="list">
+            <p:dataTable var="row" value="#{permissionsBean.lazyDataModel}" sortMode="multiple" paginator="true"
+                         paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
+
+                <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.permissions.company']}">
+                    <h:outputText value="#{row.company.name}" />
+                </p:column>
+
+                <p:column sortBy="#{row.manager.username}" headerText="#{msg['protected.permissions.manager']}">
+                    <h:outputText value="#{row.manager.username}" />
+                </p:column>
+
+                <p:column headerText="#{msg['protected.permissions.role.company']}">
+                    <h:outputText value="#{msg['protected.permissions.yes']}" rendered="#{row.roleCompany}" />
+                    <h:outputText value="#{msg['protected.permissions.no']}" rendered="#{not row.roleCompany}" />
+                </p:column>
+
+                <p:column headerText="#{msg['protected.permissions.role.permissions']}">
+                    <h:outputText value="#{msg['protected.permissions.yes']}" rendered="#{row.rolePermissions}" />
+                    <h:outputText value="#{msg['protected.permissions.no']}" rendered="#{not row.rolePermissions}" />
+                </p:column>
+
+                <p:column headerText="#{msg['protected.permissions.role.clients']}">
+                    <h:outputText value="#{msg['protected.permissions.yes']}" rendered="#{row.roleClients}" />
+                    <h:outputText value="#{msg['protected.permissions.no']}" rendered="#{not row.roleClients}" />
+                </p:column>
+
+                <p:column headerText="#{msg['protected.permissions.role.invoices']}">
+                    <h:outputText value="#{msg['protected.permissions.yes']}" rendered="#{row.roleInvoices}" />
+                    <h:outputText value="#{msg['protected.permissions.no']}" rendered="#{not row.roleInvoices}" />
+                </p:column>
+
+                <p:column headerText="#{msg['protected.permissions.role.products']}">
+                    <h:outputText value="#{msg['protected.permissions.yes']}" rendered="#{row.roleProducts}" />
+                    <h:outputText value="#{msg['protected.permissions.no']}" rendered="#{not row.roleProducts}" />
+                </p:column>
+
+                <p:column headerText="#{msg['protected.permissions.role.payments']}">
+                    <h:outputText value="#{msg['protected.permissions.yes']}" rendered="#{row.rolePayments}" />
+                    <h:outputText value="#{msg['protected.permissions.no']}" rendered="#{not row.rolePayments}" />
+                </p:column>
+
+                <p:column headerText="#{msg['layout.crud.actions']}">
+                    <p:commandButton onsuccess="editDialogWidget.show()" icon="ui-icon-pencil"
+                                     value="#{msg['layout.crud.edit']}"
+                                     update=":editForm" action="#{permissionsBean.selectEntity(row)}" />
+
+                    <p:commandButton onsuccess="deleteDialogWidget.show()" icon="ui-icon-trash"
+                                     value="#{msg['layout.crud.delete']}"
+                                     update=":deleteForm" action="#{permissionsBean.selectEntity(row)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog id="addDialog" header="#{msg['protected.permissions.create_title']}" widgetVar="addDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="addForm">
+                <p:messages id="addMessages" />
+
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.permissions.company']}">
+                        <p:selectOneMenu value="#{permissionsBean.entity.company}"
+                                         converter="#{companyTypeConverter}"
+                                         label="#{msg['protected.permissions.company']}">
+
+                            <f:selectItems value="#{permissionsBean.companies}" var="company"
+                                           itemLabel="#{company.name}" itemValue="#{company}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.manager']}">
+                        <p:inputText value="#{permissionsBean.managerUsername}"
+                                     validator="#{permissionsBean.managerValidator}"
+                                     label="#{msg['protected.permissions.manager']}" required="true" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.company']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleCompany}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.permissions']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePermissions}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.clients']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleClients}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.invoices']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleInvoices}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.products']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleProducts}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.payments']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePayments}" />
+                    </p:outputLabel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list addMessages"
+                                         oncomplete="handleClose(xhr, status, args, addDialogWidget)"
+                                         action="#{permissionsBean.saveEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="addDialogWidget.hide()"
+                                         action="#{permissionsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="editDialog" header="#{msg['protected.permissions.edit_title']}" widgetVar="editDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="editForm">
+                <p:messages id="editMessages" />
+
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.permissions.company']}">
+                        <h:outputText value="#{permissionsBean.entity.company.name}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.manager']}">
+                        <h:outputText value="#{permissionsBean.entity.manager.username}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.company']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleCompany}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.permissions']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePermissions}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.clients']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleClients}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.invoices']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleInvoices}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.products']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleProducts}" />
+                    </p:outputLabel>
+
+                    <p:outputLabel value="#{msg['protected.permissions.role.payments']}">
+                        <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePayments}" />
+                    </p:outputLabel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list :editForm editMessages"
+                                         oncomplete="handleClose(xhr, status, args, editDialogWidget)"
+                                         action="#{permissionsBean.saveEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="editDialogWidget.hide()" action="#{permissionsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
+                  resizable="false" modal="true" closable="false">
+
+            <h:form id="deleteForm">
+                <p:panelGrid columns="1">
+                    <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
+                    <h:outputText value="#{msg['protected.permissions.company']}: #{permissionsBean.entity.company.name}" />
+                    <h:outputText value="#{msg['protected.permissions.manager']}: #{permissionsBean.entity.manager.username}" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.yes']}" update=":list :deleteForm"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{permissionsBean.deleteEntity}" />
+
+                        <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{permissionsBean.cleanEntity}" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 </ui:composition>
