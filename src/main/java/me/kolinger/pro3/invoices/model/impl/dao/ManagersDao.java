@@ -4,9 +4,6 @@ import me.kolinger.pro3.invoices.model.DeletableDao;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 
