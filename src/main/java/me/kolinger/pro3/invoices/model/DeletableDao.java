@@ -23,13 +23,6 @@ public abstract class DeletableDao<T extends DeletableEntity> extends AbstractDa
     }
 
     @Override
-    protected Criteria createCriteria() {
-        Criteria criteria = super.createCriteria();
-        criteria.add(Restrictions.eq("deleted", false));
-        return criteria;
-    }
-
-    @Override
     protected Criteria createCriteria(Class clazz) {
         Criteria criteria = super.createCriteria(clazz);
         criteria.add(Restrictions.eq("deleted", false));

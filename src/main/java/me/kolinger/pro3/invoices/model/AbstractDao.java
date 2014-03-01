@@ -154,7 +154,7 @@ public abstract class AbstractDao<T> extends LoggedObject {
     }
 
     protected Criteria createCriteria() {
-        return getSession().createCriteria(getEntityClass());
+        return createCriteria(getEntityClass());
     }
 
     protected Criteria createCriteria(Class clazz) {
