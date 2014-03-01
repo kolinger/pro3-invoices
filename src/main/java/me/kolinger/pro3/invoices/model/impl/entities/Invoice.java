@@ -1,7 +1,5 @@
 package me.kolinger.pro3.invoices.model.impl.entities;
 
-import me.kolinger.pro3.invoices.model.DeletableEntity;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
