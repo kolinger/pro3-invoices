@@ -56,17 +56,12 @@ public abstract class AbstractService<T> extends LoggedObject {
     }
 
     @Transactional(readOnly = true)
-    public Integer count(String sortField, SortOrder sortOrder, AbstractFilter filter) {
-        return dao.count(sortField, sortOrder, filter);
-    }
-
-    @Transactional(readOnly = true)
     public List<T> findAll(int first, int pageSize, List<SortMeta> multiSortMeta, AbstractFilter filter) {
         return dao.findAll(first, pageSize, multiSortMeta, filter);
     }
 
     @Transactional(readOnly = true)
-    public Integer count(List<SortMeta> multiSortMeta, AbstractFilter filter) {
-        return dao.count(multiSortMeta, filter);
+    public Integer count(AbstractFilter filter) {
+        return dao.count(filter);
     }
 }

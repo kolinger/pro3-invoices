@@ -95,22 +95,6 @@ public abstract class AbstractDao<T> extends LoggedObject {
     }
 
     @SuppressWarnings("unchecked")
-    public Integer count(String sortField, SortOrder sortOrder, AbstractFilter filter) {
-        Criteria criteria = createCriteria();
-
-        // WHERE
-        if (filter != null) {
-            filter.applyFilters(criteria);
-        }
-
-        // additional criteria
-        applyDataTableCriteria(criteria);
-
-        criteria.setProjection(Projections.rowCount());
-        return (Integer) criteria.uniqueResult();
-    }
-
-    @SuppressWarnings("unchecked")
     public List<T> findAll(int first, int pageSize, List<SortMeta> multiSortMeta, AbstractFilter filter) {
         Criteria criteria = createCriteria();
 
@@ -147,7 +131,7 @@ public abstract class AbstractDao<T> extends LoggedObject {
     }
 
     @SuppressWarnings("unchecked")
-    public Integer count(List<SortMeta> multiSortMeta, AbstractFilter filter) {
+    public Integer count(AbstractFilter filter) {
         Criteria criteria = createCriteria();
 
         // WHERE
