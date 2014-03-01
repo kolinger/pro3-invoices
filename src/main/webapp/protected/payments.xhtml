@@ -61,6 +61,7 @@
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.payments.id']}">
                         <p:inputText value="#{paymentsBean.id}" required="true"
+                                     validator="#{paymentsBean.invoiceValidator}"
                                      label="#{msg['protected.payments.id']}" />
                     </p:outputLabel>
 

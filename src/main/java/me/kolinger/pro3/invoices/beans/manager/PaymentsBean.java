@@ -3,12 +3,16 @@ package me.kolinger.pro3.invoices.beans.manager;
 import me.kolinger.pro3.invoices.beans.CrudBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import me.kolinger.pro3.invoices.model.impl.entities.Invoice;
+import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import me.kolinger.pro3.invoices.model.impl.entities.Payment;
 import me.kolinger.pro3.invoices.model.impl.services.InvoicesService;
 import me.kolinger.pro3.invoices.model.impl.services.PaymentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
 /**
  * @author Tomáš Kolinger <tomas@kolinger.name>
@@ -37,16 +41,16 @@ public class PaymentsBean extends CrudBean<Payment> {
         this.id = id;
     }
 
-    public void saveEntity() {
-        if (getEntity().getInvoice() == null) {
-            Invoice invoice = invoicesService.findOneById(id);
-            if (invoice == null) {
-                sendErrorGrowl(Translator.translate("protected.payments.id.error_not_found"));
-                return;
-            }
+    public void invoiceValidator(FacesContext context, UIComponent toValidate, Object value) {
+        if (value == null) {
+            return;
+        }
+        String username = value.toString();
+        Invoice invoice = invoicesService.findOneById(id);
+        if (invoice == null) {
+            sendValidationError(Translator.translate("protected.payments.id.error_not_found"));
+        } else {
             getEntity().setInvoice(invoice);
         }
-
-        super.saveEntity();
     }
 }
