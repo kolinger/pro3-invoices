@@ -18,13 +18,6 @@ public abstract class AbstractBean extends LoggedObject {
     @Value("${date_format}")
     private String dateFormat;
 
-//    @Autowired
-//    private ClientService clientService;
-//
-//    public BigDecimal getCreditCount() {
-//        return clientService.getLoggedClient().getCredit();
-//    }
-
     public String getDateFormat() {
         return dateFormat;
     }
