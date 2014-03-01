@@ -35,6 +35,7 @@ public class LoginErrorPhaseListener extends LoggedObject implements PhaseListen
             sendErrorMessage("login.wrong_credentials");
         } else if (e != null) {
             sendErrorMessage("login.unknown_error");
+            getLogger().warn("Login unknown error", e);
         }
 
         sessionMap.put(WebAttributes.AUTHENTICATION_EXCEPTION, null);
