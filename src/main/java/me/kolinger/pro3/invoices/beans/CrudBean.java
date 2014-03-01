@@ -18,6 +18,9 @@ public abstract class CrudBean<T> extends AbstractBean {
     }
 
     public T getEntity() {
+        if (entity == null) {
+            cleanEntity();
+        }
         return entity;
     }
 
@@ -43,6 +46,6 @@ public abstract class CrudBean<T> extends AbstractBean {
     }
 
     public void cleanEntity() {
-        entity = null;
+        entity = service.createNew();
     }
 }
