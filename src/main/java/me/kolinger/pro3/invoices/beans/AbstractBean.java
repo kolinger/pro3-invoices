@@ -1,7 +1,11 @@
 package me.kolinger.pro3.invoices.beans;
 
 import me.kolinger.pro3.invoices.common.LoggedObject;
+import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -20,6 +24,12 @@ public abstract class AbstractBean extends LoggedObject {
 
     public String getDateFormat() {
         return dateFormat;
+    }
+
+    public Manager getLoggedManager() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        return (Manager) authentication.getPrincipal();
     }
 
     protected boolean isNewRequest() {

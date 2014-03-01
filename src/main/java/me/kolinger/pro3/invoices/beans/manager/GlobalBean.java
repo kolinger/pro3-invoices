@@ -20,12 +20,6 @@ import org.springframework.stereotype.Component;
 @Component("protectedGlobalBean")
 public class GlobalBean extends AbstractBean {
 
-    public Manager getLoggedManager() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        return (Manager) authentication.getPrincipal();
-    }
-
     public MenuModel getMenuModel() {
         return createMenuModel();
     }
