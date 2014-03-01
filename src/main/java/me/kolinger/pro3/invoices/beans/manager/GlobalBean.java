@@ -4,12 +4,13 @@ package me.kolinger.pro3.invoices.beans.manager;
 import me.kolinger.pro3.invoices.beans.AbstractBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
-import me.kolinger.pro3.invoices.model.impl.services.ManagersService;
 import org.primefaces.component.menuitem.MenuItem;
 import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,16 +20,10 @@ import org.springframework.stereotype.Component;
 @Component("protectedGlobalBean")
 public class GlobalBean extends AbstractBean {
 
-    @Autowired
-    public ManagersService managersService;
-
-    private Manager loggedManager;
-
     public Manager getLoggedManager() {
-        if (loggedManager == null) {
-            loggedManager = managersService.getLoggedManager();
-        }
-        return loggedManager;
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        return (Manager) authentication.getPrincipal();
     }
 
     public MenuModel getMenuModel() {

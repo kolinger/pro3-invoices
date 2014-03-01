@@ -7,7 +7,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 
@@ -25,12 +24,5 @@ public class ManagersDao extends DeletableDao<Manager> {
         Criteria criteria = createCriteria();
         criteria.add(Restrictions.eq("username", username));
         return (Manager) criteria.uniqueResult();
-    }
-
-    public Manager getLoggedManager() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        return findOneByUsername(user.getUsername());
     }
 }
