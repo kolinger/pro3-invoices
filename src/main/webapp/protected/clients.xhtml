@@ -44,8 +44,8 @@
         <p:dialog id="addDialog" header="#{msg['protected.clients.create_title']}" widgetVar="addDialogWidget"
                   resizable="false" modal="true" closable="false">
 
-            <h:form id="addForm">
-                <p:messages id="addMessages" for="addForm" />
+            <h:form id="addForm" styleClass="b-form">
+                <p:messages id="addMessages" />
 
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.clients.company']}">
@@ -125,8 +125,8 @@
         <p:dialog id="editDialog" header="#{msg['protected.clients.edit_title']}" widgetVar="editDialogWidget"
                   resizable="false" modal="true" closable="false">
 
-            <h:form id="editForm">
-                <p:messages id="editMessages" for="editForm" />
+            <h:form id="editForm" styleClass="b-form">
+                <p:messages id="editMessages" />
 
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.clients.name']}">

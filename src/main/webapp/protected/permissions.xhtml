@@ -70,7 +70,7 @@
         <p:dialog id="addDialog" header="#{msg['protected.permissions.create_title']}" widgetVar="addDialogWidget"
                   resizable="false" modal="true" closable="false">
 
-            <h:form id="addForm">
+            <h:form id="addForm" styleClass="b-form">
                 <p:messages id="addMessages" />
 
                 <p:panelGrid columns="1">
@@ -90,29 +90,35 @@
                                      label="#{msg['protected.permissions.manager']}" required="true" />
                     </p:outputLabel>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.company']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.company']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleCompany}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.permissions']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.permissions']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePermissions}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.clients']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.clients']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleClients}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.invoices']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.invoices']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleInvoices}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.products']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.products']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleProducts}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.payments']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.payments']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePayments}" />
-                    </p:outputLabel>
+                    </p:row>
 
                     <f:facet name="footer">
                         <p:commandButton value="#{msg['layout.crud.save']}" update=":list addMessages"
@@ -130,41 +136,47 @@
         <p:dialog id="editDialog" header="#{msg['protected.permissions.edit_title']}" widgetVar="editDialogWidget"
                   resizable="false" modal="true" closable="false">
 
-            <h:form id="editForm">
+            <h:form id="editForm" styleClass="b-form">
                 <p:messages id="editMessages" />
 
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.permissions.company']}">
-                        <h:outputText value="#{permissionsBean.entity.company.name}" />
+                        <h:outputText value="#{permissionsBean.entity.company.name}" styleClass="text" />
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.permissions.manager']}">
-                        <h:outputText value="#{permissionsBean.entity.manager.username}" />
+                        <h:outputText value="#{permissionsBean.entity.manager.username}" styleClass="text" />
                     </p:outputLabel>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.company']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.company']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleCompany}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.permissions']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.permissions']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePermissions}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.clients']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.clients']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleClients}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.invoices']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.invoices']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleInvoices}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.products']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.products']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.roleProducts}" />
-                    </p:outputLabel>
+                    </p:row>
 
-                    <p:outputLabel value="#{msg['protected.permissions.role.payments']}">
+                    <p:row>
+                        <p:outputLabel value="#{msg['protected.permissions.role.payments']}" styleClass="check-label" />
                         <p:selectBooleanCheckbox value="#{permissionsBean.entity.rolePayments}" />
-                    </p:outputLabel>
+                    </p:row>
 
                     <f:facet name="footer">
                         <p:commandButton value="#{msg['layout.crud.save']}" update=":list :editForm editMessages"

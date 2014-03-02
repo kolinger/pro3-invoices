@@ -30,6 +30,38 @@
 	margin-left: 10px;
 }
 
+#buttons {
+    margin-bottom: 10px;
+}
+
+table tr td {
+    vertical-align: middle !important;
+}
+
+.b-form label {
+    width: 450px !important;
+    vertical-align: middle !important;
+}
+
+.b-form label input,
+.b-form label select,
+.b-form .ui-selectonemenu,
+.b-form textarea,
+.b-form .text {
+    float: right !important;
+    width: 300px;
+}
+
+.b-form .check-label {
+    width: 150px !important;
+    float: left !important;
+}
+
+.b-form input[type="checkbox"],
+.ui-chkbox {
+    float: left !important;
+}
+
 /************************ invoice print ************************/
 
 .invoice {

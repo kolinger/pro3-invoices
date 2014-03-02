@@ -8,20 +8,28 @@
     <ui:define name="title">#{msg['public.login.title']}</ui:define>
 
     <ui:define name="content">
-        <form method="post" action="#{request.contextPath}/protected/j_spring_security_check">
+        <form method="post" action="#{request.contextPath}/protected/j_spring_security_check" class="b-form">
             <h:messages />
 
-            <div class="form-group">
-                <label for="email">#{msg['public.login.username']}</label>
-                <input type="text" name="j_username" id="email" class="form-control" />
+            <div>
+                <label>
+                    <h:outputText value="#{msg['public.login.username']}" />
+                    <input type="text" name="j_username" id="email"
+                           class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" />
+                </label>
             </div>
 
-            <div class="form-group">
-                <label for="password">#{msg['public.login.password']}</label>
-                <input type="password" name="j_password" id="password" class="form-control" />
+            <div>
+                <label for="password">
+                    <h:outputText value="#{msg['public.login.password']}" />
+                    <input type="password" name="j_password" id="password"
+                           class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" />
+                </label>
             </div>
 
-            <input name="submit" type="submit" value="#{msg['public.login.send']}" class="btn btn-default" />
+            <div>
+                <input name="submit" type="submit" value="#{msg['public.login.send']}" class="btn btn-default" />
+            </div>
         </form>
     </ui:define>
 </ui:composition>

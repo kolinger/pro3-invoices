@@ -55,7 +55,7 @@
         <p:dialog id="addDialog" header="#{msg['protected.payments.create_title']}" widgetVar="addDialogWidget"
                   resizable="false" modal="true" closable="false">
     
-            <h:form id="addForm">
+            <h:form id="addForm" styleClass="b-form">
                 <p:messages id="addMessages" />
     
                 <p:panelGrid columns="1">
@@ -97,12 +97,12 @@
         <p:dialog id="editDialog" header="#{msg['protected.payments.edit_title']}" widgetVar="editDialogWidget"
                   resizable="false" modal="true" closable="false">
     
-            <h:form id="editForm">
+            <h:form id="editForm" styleClass="b-form">
                 <p:messages id="editMessages" />
     
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.payments.id']}">
-                        <h:outputText value="#{paymentsBean.entity.invoice.id}" />
+                        <h:outputText value="#{paymentsBean.entity.invoice.id}" styleClass="text" />
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.payments.amount']}">
