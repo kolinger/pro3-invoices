@@ -11,6 +11,9 @@ public abstract class CrudBean<T> extends AbstractBean {
     private LazyDataModel<T> lazyDataModel;
     private AbstractService<T> service;
     private T entity;
+    private Boolean addDialogDisplayed = false;
+    private Boolean editDialogDisplayed = false;
+    private Boolean deleteDialogDisplayed = false;
 
     public CrudBean(AbstractService<T> service) {
         this.service = service;
@@ -18,34 +21,63 @@ public abstract class CrudBean<T> extends AbstractBean {
     }
 
     public T getEntity() {
-        if (entity == null) {
-            cleanEntity();
-        }
         return entity;
+    }
+
+    public void setEntity(T entity) {
+        this.entity = entity;
     }
 
     public LazyDataModel<T> getLazyDataModel() {
         return lazyDataModel;
     }
 
-    public void createNewEntity() {
+    public Boolean getAddDialogDisplayed() {
+        return addDialogDisplayed;
+    }
+
+    public Boolean getEditDialogDisplayed() {
+        return editDialogDisplayed;
+    }
+
+    public Boolean getDeleteDialogDisplayed() {
+        return deleteDialogDisplayed;
+    }
+
+    public void showAddDialog() {
+        addDialogDisplayed = true;
         entity = service.createNew();
     }
 
-    public void selectEntity(T entity) {
+    public void hideAddDialog() {
+        addDialogDisplayed = false;
+    }
+
+    public void showEditDialog(T entity) {
+        editDialogDisplayed = true;
         this.entity = entity;
     }
 
+    public void hideEditDialog() {
+        editDialogDisplayed = false;
+    }
+
+    public void showDeleteDialog(T entity) {
+        deleteDialogDisplayed = true;
+        this.entity = entity;
+    }
+
+    public void hideDeleteDialog() {
+        deleteDialogDisplayed = false;
+    }
+
     public void saveEntity() {
+        editDialogDisplayed = false;
+        addDialogDisplayed = false;
         service.save(entity);
-        cleanEntity();
     }
 
     public void deleteEntity() {
         service.delete(entity);
-    }
-
-    public void cleanEntity() {
-        entity = service.createNew();
     }
 }

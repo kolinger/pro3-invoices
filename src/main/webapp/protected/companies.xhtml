@@ -9,7 +9,7 @@
 
     <ui:define name="content">
         <h:form id="buttons">
-            <p:commandButton value="#{msg['protected.companies.create']}" action="#{companiesBean.createNewEntity}"
+            <p:commandButton value="#{msg['protected.companies.create']}" action="#{companiesBean.showAddDialog}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
         </h:form>
 
@@ -22,13 +22,13 @@
                 </p:column>
 
                 <p:column headerText="#{msg['layout.crud.actions']}">
-                    <p:commandButton onsuccess="editDialogWidget.show()" icon="ui-icon-pencil"
+                    <p:commandButton oncomplete="editDialogWidget.show()" icon="ui-icon-pencil"
                                      value="#{msg['layout.crud.edit']}"
-                                     update=":editForm" action="#{companiesBean.selectEntity(row)}" />
+                                     update=":editDialog" action="#{companiesBean.showEditDialog(row)}" />
 
-                    <p:commandButton onsuccess="deleteDialogWidget.show()" icon="ui-icon-trash"
+                    <p:commandButton oncomplete="deleteDialogWidget.show()" icon="ui-icon-trash"
                                      value="#{msg['layout.crud.delete']}"
-                                     update=":deleteForm" action="#{companiesBean.selectEntity(row)}" />
+                                     update=":deleteDialog" action="#{companiesBean.showDeleteDialog(row)}" />
                 </p:column>
             </p:dataTable>
         </h:form>
@@ -36,7 +36,7 @@
         <p:dialog id="addDialog" header="#{msg['protected.companies.create_title']}" widgetVar="addDialogWidget"
                   resizable="false" modal="true" closable="false">
 
-            <h:form id="addForm" styleClass="b-form">
+            <h:form id="addForm" styleClass="b-form" rendered="#{companiesBean.addDialogDisplayed}">
                 <p:messages id="addMessages" />
 
                 <p:panelGrid columns="1">
@@ -113,7 +113,7 @@
 
                         <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
                                          onsuccess="addDialogWidget.hide()"
-                                         action="#{companiesBean.cleanEntity}" />
+                                         action="#{companiesBean.hideAddDialog}" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>
@@ -122,7 +122,7 @@
         <p:dialog id="editDialog" header="#{msg['protected.companies.edit_title']}" widgetVar="editDialogWidget"
                   resizable="false" modal="true" closable="false">
 
-            <h:form id="editForm" styleClass="b-form">
+            <h:form id="editForm" styleClass="b-form" rendered="#{companiesBean.editDialogDisplayed}">
                 <p:messages id="editMessages" />
 
                 <p:panelGrid columns="1">
@@ -198,7 +198,7 @@
                                          action="#{companiesBean.saveEntity}" />
 
                         <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
-                                         onsuccess="editDialogWidget.hide()" action="#{companiesBean.cleanEntity}" />
+                                         onsuccess="editDialogWidget.hide()" action="#{companiesBean.hideEditDialog}" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>
@@ -207,7 +207,7 @@
         <p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
                   resizable="false" modal="true" closable="false">
 
-            <h:form id="deleteForm">
+            <h:form id="deleteForm" rendered="#{companiesBean.deleteDialogDisplayed}">
                 <p:panelGrid columns="1">
                     <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
                     <h:outputText value="#{msg['protected.companies.name']} #{companiesBean.entity.name}" />
@@ -219,7 +219,7 @@
 
                         <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
                                          onsuccess="deleteDialogWidget.hide()"
-                                         action="#{companiesBean.cleanEntity}" />
+                                         action="#{companiesBean.hideDeleteDialog}" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>

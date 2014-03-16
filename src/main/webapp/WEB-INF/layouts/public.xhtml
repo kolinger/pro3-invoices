@@ -4,6 +4,7 @@
                 xmlns:c="http://java.sun.com/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pretty="http://ocpsoft.com/prettyfaces"
                 template="/WEB-INF/layouts/layout.xhtml">
 
     <ui:define name="head">
@@ -16,17 +17,37 @@
 
     <ui:define name="userPanel">
         <p>
-            <h:outputLink value="#{request.contextPath}/registration/">
+            <pretty:link mappingId="registration">
                 <h:outputText value="#{msg['layout.registration']}" />
-            </h:outputLink>
+            </pretty:link>
             |
-            <h:outputLink value="#{request.contextPath}/login/">
+            <pretty:link mappingId="login">
                 <h:outputText value="#{msg['layout.login']}" />
-            </h:outputLink>
+            </pretty:link>
         </p>
     </ui:define>
 
     <ui:define name="navigation">
-        <h:form><p:menubar model="#{publicGlobalBean.menuModel}" /></h:form>
+        <nav class="navbar navbar-default">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+                <ul class="nav navbar-nav">
+                    <li class="#{protectedGlobalBean.currentViewId == 'index' ? 'active' : ''}">
+                        <pretty:link mappingId="index">
+                            <h:outputText value="#{msg['public.index.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                    <li class="#{protectedGlobalBean.currentViewId == 'registration' ? 'active' : ''}">
+                        <pretty:link mappingId="registration">
+                            <h:outputText value="#{msg['public.registration.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                    <li class="#{protectedGlobalBean.currentViewId == 'login' ? 'active' : ''}">
+                        <pretty:link mappingId="login">
+                            <h:outputText value="#{msg['public.login.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </ui:define>
 </ui:composition>

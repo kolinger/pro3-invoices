@@ -2,7 +2,6 @@ package me.kolinger.pro3.invoices.model.impl.entities;
 
 import me.kolinger.pro3.invoices.model.DeletableEntity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,14 +16,14 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product extends DeletableEntity {
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Company company;
 
     @Column(nullable = false)
     private String name;
 
     @Column()
-    private Integer count = - 1;
+    private Integer count = -1;
 
     @Column()
     private BigDecimal price = new BigDecimal(-1);

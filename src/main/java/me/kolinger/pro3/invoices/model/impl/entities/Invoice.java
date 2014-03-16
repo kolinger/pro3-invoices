@@ -1,5 +1,8 @@
 package me.kolinger.pro3.invoices.model.impl.entities;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +31,8 @@ public class Invoice implements Serializable {
     @SequenceGenerator(name = "invoice_seq", sequenceName = "invoice_seq", initialValue = 1000000000, allocationSize = 1)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "invoice", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
     private List<InvoiceProduct> products = new ArrayList<InvoiceProduct>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
@@ -37,7 +41,7 @@ public class Invoice implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Company company;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Client client;
 
     @Column(nullable = false)

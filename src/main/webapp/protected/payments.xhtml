@@ -10,7 +10,7 @@
 
     <ui:define name="content">
         <h:form id="buttons">
-            <p:commandButton value="#{msg['protected.payments.create']}" action="#{paymentsBean.createNewEntity}"
+            <p:commandButton value="#{msg['protected.payments.create']}" action="#{paymentsBean.showAddDialog}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
         </h:form>
     

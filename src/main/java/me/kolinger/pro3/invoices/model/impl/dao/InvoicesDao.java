@@ -1,18 +1,17 @@
 package me.kolinger.pro3.invoices.model.impl.dao;
 
+import me.kolinger.pro3.invoices.common.Helper;
 import me.kolinger.pro3.invoices.model.AbstractDao;
+import me.kolinger.pro3.invoices.model.filter.AbstractFilter;
 import me.kolinger.pro3.invoices.model.impl.entities.Invoice;
-import me.kolinger.pro3.invoices.model.impl.entities.Manager;
-import me.kolinger.pro3.invoices.model.impl.entities.Permission;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Property;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.primefaces.model.SortMeta;
+import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -35,20 +34,38 @@ public class InvoicesDao extends AbstractDao<Invoice> {
         super.delete(entity);
     }
 
+    public List<Invoice> findAll(int first, int pageSize, String sortField, SortOrder sortOrder, AbstractFilter filter) {
+        List<Invoice> list = super.findAll(first, pageSize, sortField, sortOrder, filter);
+        for (Invoice invoice : list) {
+            Hibernate.initialize(invoice.getProducts());
+        }
+        return list;
+    }
+
+    public List<Invoice> findAll(int first, int pageSize, List<SortMeta> multiSortMeta, AbstractFilter filter) {
+        List<Invoice> list = super.findAll(first, pageSize, multiSortMeta, filter);
+        for (Invoice invoice : list) {
+            Hibernate.initialize(invoice.getProducts());
+        }
+        return list;
+    }
+
     @Override
     protected Criteria createCriteria(Class clazz) {
         Criteria criteria = super.createCriteria(clazz);
 
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        Manager manager = (Manager) authentication.getPrincipal();
+        // eager loading
+        criteria.createCriteria("client", "client");
 
-        DetachedCriteria permissionsQuery = DetachedCriteria.forClass(Permission.class)
-                .add(Restrictions.eq("roleInvoices", true))
-                .add(Restrictions.eq("manager", manager))
-                .setProjection(Projections.property("company.id"));
+        // security
+        criteria.createCriteria("company", "company");
+        criteria.createAlias("company.permissions", "permissions");
+        criteria.add(Restrictions.eq("permissions.manager", Helper.getLoggedManager()));
+        criteria.add(Restrictions.eq("permissions.roleInvoices", true));
 
-        return criteria.add(Property.forName("company.id").in(permissionsQuery))
-                .add(Restrictions.eq("deleted", false));
+        // common
+        criteria.add(Restrictions.eq("deleted", false));
+
+        return criteria;
     }
 }

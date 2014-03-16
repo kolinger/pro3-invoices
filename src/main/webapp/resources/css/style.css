@@ -62,6 +62,19 @@ table tr td {
     float: left !important;
 }
 
+.b-form label.short {
+    width: 150px !important;
+}
+
+.b-form label.short input {
+    width: 100px !important;
+}
+.b-form .text2 {
+    float: none;
+    padding-right: 10px;
+    font-weight: bolder;
+}
+
 /************************ invoice print ************************/
 
 .invoice {

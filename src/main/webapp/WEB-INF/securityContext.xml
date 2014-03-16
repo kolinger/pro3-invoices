@@ -19,10 +19,12 @@
         <intercept-url pattern="/protected/j_spring_security_check" access="isAnonymous()" />
         <intercept-url pattern="/protected/**" access="hasRole('ROLE_MANAGER')" />
 
-        <form-login login-page="/login/"
+        <form-login login-page="/login"
                     login-processing-url="/protected/j_spring_security_check"
-                    default-target-url="/protected/companies/" />
+                    default-target-url="/protected/companies" />
 
-        <logout logout-url="/protected/logout/" logout-success-url="/login/" />
+        <logout logout-url="/protected/logout" logout-success-url="/login" />
+
+        <session-management session-fixation-protection="migrateSession" />
     </http>
 </beans:beans>

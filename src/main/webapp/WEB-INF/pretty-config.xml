@@ -5,54 +5,54 @@
 
     <!-- ******************************* public ******************************* -->
 
-    <url-mapping>
+    <url-mapping id="index">
         <pattern value="/" />
         <view-id value="/public/index.xhtml" />
     </url-mapping>
 
-    <url-mapping>
-        <pattern value="/registration/" />
+    <url-mapping id="registration">
+        <pattern value="/registration" />
         <view-id value="/public/registration/form.xhtml" />
     </url-mapping>
-    <url-mapping>
-        <pattern value="/registration/success/" />
+    <url-mapping id="registration-success">
+        <pattern value="/registration/success" />
         <view-id value="/public/registration/success.xhtml" />
     </url-mapping>
 
-    <url-mapping>
-        <pattern value="/login/" />
+    <url-mapping id="login">
+        <pattern value="/login" />
         <view-id value="/public/login.xhtml" />
     </url-mapping>
 
     <!-- ******************************* protected ******************************* -->
 
-    <url-mapping>
-        <pattern value="/protected/companies/" />
+    <url-mapping id="companies">
+        <pattern value="/protected/companies" />
         <view-id value="/protected/companies.xhtml" />
     </url-mapping>
 
-    <url-mapping>
-        <pattern value="/protected/permissions/" />
+    <url-mapping id="permissions">
+        <pattern value="/protected/permissions" />
         <view-id value="/protected/permissions.xhtml" />
     </url-mapping>
 
-    <url-mapping>
-        <pattern value="/protected/clients/" />
+    <url-mapping id="clients">
+        <pattern value="/protected/clients" />
         <view-id value="/protected/clients.xhtml" />
     </url-mapping>
 
-    <url-mapping>
-        <pattern value="/protected/invoices/" />
+    <url-mapping id="invoices">
+        <pattern value="/protected/invoices_" />
         <view-id value="/protected/invoices.xhtml" />
     </url-mapping>
 
-    <url-mapping>
-        <pattern value="/protected/products/" />
+    <url-mapping id="products">
+        <pattern value="/protected/products" />
         <view-id value="/protected/products.xhtml" />
     </url-mapping>
 
-    <url-mapping>
-        <pattern value="/protected/payments/" />
+    <url-mapping id="payments">
+        <pattern value="/protected/payments" />
         <view-id value="/protected/payments.xhtml" />
     </url-mapping>
 </pretty-config>

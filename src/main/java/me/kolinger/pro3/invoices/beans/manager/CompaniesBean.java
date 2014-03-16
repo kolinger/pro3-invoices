@@ -45,7 +45,5 @@ public class CompaniesBean extends CrudBean<Company> {
             permission.setRolePayments(true);
             permissionsService.save(permission);
         }
-
-        cleanEntity();
     }
 }

@@ -21,12 +21,9 @@ public class ClientsBean extends CrudBean<Client> {
     @Autowired
     public CompaniesService companiesService;
 
-    private ClientsService service;
-
     @Autowired
     public ClientsBean(ClientsService service) {
         super(service);
-        this.service = service;
     }
 
     public List<Company> getCompanies() {

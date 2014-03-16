@@ -1,6 +1,7 @@
 package me.kolinger.pro3.invoices.beans.manager;
 
 
+import com.ocpsoft.pretty.PrettyContext;
 import me.kolinger.pro3.invoices.beans.AbstractBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import org.primefaces.component.menuitem.MenuItem;
@@ -15,6 +16,10 @@ import org.springframework.stereotype.Component;
 @Scope("session")
 @Component("protectedGlobalBean")
 public class GlobalBean extends AbstractBean {
+
+    public String getCurrentViewId() {
+        return PrettyContext.getCurrentInstance().getCurrentMapping().getId();
+    }
 
     public MenuModel getMenuModel() {
         return createMenuModel();

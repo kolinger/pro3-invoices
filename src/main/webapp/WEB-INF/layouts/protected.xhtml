@@ -4,6 +4,7 @@
                 xmlns:c="http://java.sun.com/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pretty="http://ocpsoft.com/prettyfaces"
                 template="/WEB-INF/layouts/layout.xhtml">
 
     <ui:define name="head">
@@ -25,6 +26,44 @@
     </ui:define>
 
     <ui:define name="navigation">
-        <h:form><p:menubar model="#{protectedGlobalBean.menuModel}" /></h:form>
+        <nav class="navbar navbar-default">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+                <ul class="nav navbar-nav">
+                    <li class="#{protectedGlobalBean.currentViewId == 'companies' ? 'active' : ''}">
+                        <pretty:link mappingId="companies">
+                            <h:outputText value="#{msg['protected.companies.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                    <li class="#{protectedGlobalBean.currentViewId == 'permissions' ? 'active' : ''}">
+                        <pretty:link mappingId="permissions">
+                            <h:outputText value="#{msg['protected.permissions.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                    <li class="#{protectedGlobalBean.currentViewId == 'clients' ? 'active' : ''}">
+                        <pretty:link mappingId="clients">
+                            <h:outputText value="#{msg['protected.clients.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                    <li class="#{protectedGlobalBean.currentViewId == 'invoices' ? 'active' : ''}">
+                        <pretty:link mappingId="invoices">
+                            <h:outputText value="#{msg['protected.invoices.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                    <li class="#{protectedGlobalBean.currentViewId == 'products' ? 'active' : ''}">
+                        <pretty:link mappingId="products">
+                            <h:outputText value="#{msg['protected.products.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                    <li class="#{protectedGlobalBean.currentViewId == 'payments' ? 'active' : ''}">
+                        <pretty:link mappingId="payments">
+                            <h:outputText value="#{msg['protected.payments.navigation_title']}" />
+                        </pretty:link>
+                    </li>
+                </ul>
+                <div class="company-select pull-right">
+
+                </div>
+            </div>
+        </nav>
     </ui:define>
 </ui:composition>

@@ -1,5 +1,6 @@
 package me.kolinger.pro3.invoices.model.impl.dao;
 
+import me.kolinger.pro3.invoices.common.Helper;
 import me.kolinger.pro3.invoices.model.AbstractDao;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import me.kolinger.pro3.invoices.model.impl.entities.Permission;
@@ -28,15 +29,15 @@ public class PermissionsDao extends AbstractDao<Permission> {
     protected Criteria createCriteria(Class clazz) {
         Criteria criteria = super.createCriteria(clazz);
 
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        Manager manager = (Manager) authentication.getPrincipal();
+        // eager loading
+        criteria.createAlias("company", "company");
+        criteria.createAlias("manager", "manager");
 
-        DetachedCriteria permissionsQuery = DetachedCriteria.forClass(Permission.class)
-                .add(Restrictions.eq("rolePermissions", true))
-                .add(Restrictions.eq("manager", manager))
-                .setProjection(Projections.property("company.id"));
+        // security
+        criteria.createAlias("company.permissions", "permissions");
+        criteria.add(Restrictions.eq("permissions.manager", Helper.getLoggedManager()));
+        criteria.add(Restrictions.eq("permissions.roleProducts", true));
 
-        return criteria.add(Property.forName("company.id").in(permissionsQuery));
+        return criteria;
     }
 }
