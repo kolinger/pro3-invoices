@@ -10,7 +10,7 @@
 
     <ui:define name="content">
         <h:form id="buttons">
-            <p:commandButton value="#{msg['protected.payments.create']}" action="#{paymentsBean.showAddDialog}"
+            <p:commandButton value="#{msg['protected.payments.create']}" action="#{paymentsBean.createNew}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
         </h:form>
     
@@ -53,7 +53,7 @@
         </h:form>
     
         <p:dialog id="addDialog" header="#{msg['protected.payments.create_title']}" widgetVar="addDialogWidget"
-                  resizable="false" modal="true" closable="false">
+                  resizable="false" modal="true" closable="false" dynamic="true">
     
             <h:form id="addForm" styleClass="b-form">
                 <p:messages id="addMessages" />
@@ -87,15 +87,14 @@
                                          action="#{paymentsBean.saveEntity}" />
     
                         <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
-                                         onsuccess="addDialogWidget.hide()"
-                                         action="#{paymentsBean.cleanEntity}" />
+                                         onsuccess="addDialogWidget.hide()" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>
         </p:dialog>
     
         <p:dialog id="editDialog" header="#{msg['protected.payments.edit_title']}" widgetVar="editDialogWidget"
-                  resizable="false" modal="true" closable="false">
+                  resizable="false" modal="true" closable="false" dynamic="true">
     
             <h:form id="editForm" styleClass="b-form">
                 <p:messages id="editMessages" />
@@ -127,7 +126,7 @@
                                          action="#{paymentsBean.saveEntity}" />
     
                         <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
-                                         onsuccess="editDialogWidget.hide()" action="#{paymentsBean.cleanEntity}" />
+                                         onsuccess="editDialogWidget.hide()" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>
@@ -147,8 +146,7 @@
                                          action="#{paymentsBean.deleteEntity}" />
     
                         <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
-                                         onsuccess="deleteDialogWidget.hide()"
-                                         action="#{paymentsBean.cleanEntity}" />
+                                         onsuccess="deleteDialogWidget.hide()" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>

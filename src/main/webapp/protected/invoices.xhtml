@@ -5,292 +5,290 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/layouts/protected.xhtml">
 
-<ui:define name="title">#{msg['protected.invoices.title']}</ui:define>
+    <ui:define name="title">#{msg['protected.invoices.title']}</ui:define>
 
-<ui:define name="content">
-<h:form id="buttons">
-    <p:commandButton value="#{msg['protected.invoices.create']}" action="#{invoicesBean.showAddDialog}"
-                     update=":addDialog" oncomplete="addDialogWidget.show()" />
-</h:form>
+    <ui:define name="content">
+        <h:form id="buttons">
+            <p:commandButton value="#{msg['protected.invoices.create']}" action="#{invoicesBean.createNew}"
+                             update=":addDialog" oncomplete="addDialogWidget.show()" />
+        </h:form>
 
-<h:form id="list">
-    <p:dataTable var="row" value="#{invoicesBean.lazyDataModel}" sortMode="multiple" paginator="true"
-                 paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
+        <h:form id="list">
+            <p:dataTable var="row" value="#{invoicesBean.lazyDataModel}" sortMode="multiple" paginator="true"
+                         paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
 
-        <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.invoices.company']}">
-            <h:outputText value="#{row.company.name}" />
-        </p:column>
+                <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.invoices.company']}">
+                    <h:outputText value="#{row.company.name}" />
+                </p:column>
 
-        <p:column sortBy="#{row.id}" headerText="#{msg['protected.invoices.id']}">
-            <h:outputText value="#{row.id}" />
-        </p:column>
+                <p:column sortBy="#{row.id}" headerText="#{msg['protected.invoices.id']}">
+                    <h:outputText value="#{row.id}" />
+                </p:column>
 
-        <p:column sortBy="#{row.client.name}" headerText="#{msg['protected.invoices.client']}">
-            <h:outputText value="#{row.client.name}" />
-        </p:column>
+                <p:column sortBy="#{row.client.name}" headerText="#{msg['protected.invoices.client']}">
+                    <h:outputText value="#{row.client.name}" />
+                </p:column>
 
-        <p:column sortBy="#{row.type}" headerText="#{msg['protected.invoices.type']}">
-            <h:outputText value="#{msg['protected.invoices.type.invoice']}"
-                          rendered="#{row.type.ordinal() == 0}" />
+                <p:column sortBy="#{row.type}" headerText="#{msg['protected.invoices.type']}">
+                    <h:outputText value="#{msg['protected.invoices.type.invoice']}"
+                                  rendered="#{row.type.ordinal() == 0}" />
 
-            <h:outputText value="#{msg['protected.invoices.type.credit_note']}"
-                          rendered="#{row.type.ordinal() == 1}" />
-        </p:column>
+                    <h:outputText value="#{msg['protected.invoices.type.credit_note']}"
+                                  rendered="#{row.type.ordinal() == 1}" />
+                </p:column>
 
-        <p:column headerText="#{msg['protected.invoices.amount']}">
-            <h:outputText value="todo" />
-        </p:column>
+                <p:column headerText="#{msg['protected.invoices.amount']}">
+                    <h:outputText value="todo" />
+                </p:column>
 
-        <p:column sortBy="#{row.createDate}" headerText="#{msg['protected.invoices.create_date']}">
-            <h:outputText value="#{row.createDate}">
-                <f:convertDateTime pattern="#{invoicesBean.dateFormat}" />
-            </h:outputText>
-        </p:column>
+                <p:column sortBy="#{row.createDate}" headerText="#{msg['protected.invoices.create_date']}">
+                    <h:outputText value="#{row.createDate}">
+                        <f:convertDateTime pattern="#{invoicesBean.dateFormat}" />
+                    </h:outputText>
+                </p:column>
 
-        <p:column sortBy="#{row.endDate}" headerText="#{msg['protected.invoices.end_date']}">
-            <h:outputText value="#{row.endDate}">
-                <f:convertDateTime pattern="#{invoicesBean.dateFormat}" />
-            </h:outputText>
-        </p:column>
+                <p:column sortBy="#{row.endDate}" headerText="#{msg['protected.invoices.end_date']}">
+                    <h:outputText value="#{row.endDate}">
+                        <f:convertDateTime pattern="#{invoicesBean.dateFormat}" />
+                    </h:outputText>
+                </p:column>
 
-        <p:column headerText="#{msg['layout.crud.actions']}">
-            <p:commandButton oncomplete="editDialogWidget.show()" icon="ui-icon-pencil"
-                             value="#{msg['layout.crud.edit']}"
-                             update=":editDialog" action="#{invoicesBean.showEditDialog(row)}" />
+                <p:column headerText="#{msg['layout.crud.actions']}">
+                    <p:commandButton oncomplete="editDialogWidget.show()" icon="ui-icon-pencil"
+                                     value="#{msg['layout.crud.edit']}"
+                                     update=":editDialog" action="#{invoicesBean.selectEntity(row)}" />
 
-            <p:commandButton oncomplete="deleteDialogWidget.show()" icon="ui-icon-trash"
-                             value="#{msg['layout.crud.delete']}"
-                             update=":deleteDialog" action="#{invoicesBean.showDeleteDialog(row)}" />
-        </p:column>
-    </p:dataTable>
-</h:form>
+                    <p:commandButton oncomplete="deleteDialogWidget.show()" icon="ui-icon-trash"
+                                     value="#{msg['layout.crud.delete']}"
+                                     update=":deleteDialog" action="#{invoicesBean.selectEntity(row)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
 
-<p:dialog id="addDialog" header="#{msg['protected.invoices.create_title']}" widgetVar="addDialogWidget"
-          resizable="false" modal="true" closable="false">
+        <p:dialog id="addDialog" header="#{msg['protected.invoices.create_title']}" widgetVar="addDialogWidget"
+                  resizable="false" modal="true" closable="false" dynamic="true">
 
-    <h:form id="addForm" styleClass="b-form" rendered="#{invoicesBean.addDialogDisplayed}">
-        <p:messages id="addMessages" />
+            <h:form id="addForm" styleClass="b-form">
+                <p:messages id="addMessages" />
 
-        <p:panelGrid columns="1">
-            <p:outputLabel value="#{msg['protected.invoices.company']}">
-                <p:selectOneMenu value="#{invoicesBean.entity.company}"
-                                 converter="#{companyTypeConverter}"
-                                 label="#{msg['protected.invoices.company']}">
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.invoices.company']}">
+                        <p:selectOneMenu value="#{invoicesBean.entity.company}"
+                                         converter="#{companyTypeConverter}"
+                                         label="#{msg['protected.invoices.company']}">
 
-                    <f:selectItems value="#{invoicesBean.companies}" var="company"
-                                   itemLabel="#{company.name}" itemValue="#{company}" />
-                </p:selectOneMenu>
-            </p:outputLabel>
+                            <f:selectItems value="#{invoicesBean.companies}" var="company"
+                                           itemLabel="#{company.name}" itemValue="#{company}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.client']}">
-                <p:selectOneMenu value="#{invoicesBean.entity.client}"
-                                 converter="#{clientTypeConverter}"
-                                 label="#{msg['protected.invoices.client']}">
+                    <p:outputLabel value="#{msg['protected.invoices.client']}">
+                        <p:selectOneMenu value="#{invoicesBean.entity.client}"
+                                         converter="#{clientTypeConverter}"
+                                         label="#{msg['protected.invoices.client']}">
 
-                    <f:selectItems value="#{invoicesBean.clients}" var="client"
-                                   itemLabel="#{client.name}" itemValue="#{client}" />
-                </p:selectOneMenu>
-            </p:outputLabel>
+                            <f:selectItems value="#{invoicesBean.clients}" var="client"
+                                           itemLabel="#{client.name}" itemValue="#{client}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.type']}">
-                <p:selectOneMenu value="#{invoicesBean.entity.type}"
-                                 label="#{msg['protected.invoices.type']}">
+                    <p:outputLabel value="#{msg['protected.invoices.type']}">
+                        <p:selectOneMenu value="#{invoicesBean.entity.type}"
+                                         label="#{msg['protected.invoices.type']}">
 
-                    <f:selectItems value="#{invoicesBean.types}" var="type"
-                                   itemLabel="#{type[1]}" itemValue="#{type[0]}" />
-                </p:selectOneMenu>
-            </p:outputLabel>
+                            <f:selectItems value="#{invoicesBean.types}" var="type"
+                                           itemLabel="#{type[1]}" itemValue="#{type[0]}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.create_date']}">
-                <p:calendar value="#{invoicesBean.entity.createDate}"
-                            label="#{msg['protected.invoices.create_date']}"
-                            required="true" pattern="#{invoicesBean.dateFormat}" />
-            </p:outputLabel>
+                    <p:outputLabel value="#{msg['protected.invoices.create_date']}">
+                        <p:calendar value="#{invoicesBean.entity.createDate}"
+                                    label="#{msg['protected.invoices.create_date']}"
+                                    required="true" pattern="#{invoicesBean.dateFormat}" />
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.end_date']}">
-                <p:calendar value="#{invoicesBean.entity.endDate}"
-                            label="#{msg['protected.invoices.end_date']}"
-                            required="true" pattern="#{invoicesBean.dateFormat}" />
-            </p:outputLabel>
+                    <p:outputLabel value="#{msg['protected.invoices.end_date']}">
+                        <p:calendar value="#{invoicesBean.entity.endDate}"
+                                    label="#{msg['protected.invoices.end_date']}"
+                                    required="true" pattern="#{invoicesBean.dateFormat}" />
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.comment']}">
-                <p:inputTextarea value="#{invoicesBean.entity.comment}"
-                                 label="#{msg['protected.invoices.comment']}" />
-            </p:outputLabel>
+                    <p:outputLabel value="#{msg['protected.invoices.comment']}">
+                        <p:inputTextarea value="#{invoicesBean.entity.comment}"
+                                         label="#{msg['protected.invoices.comment']}" />
+                    </p:outputLabel>
 
-            <p:row>
-                <p:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
-                    <f:selectItems value="#{invoicesBean.products}" var="product"
-                                   itemLabel="#{product.name}" itemValue="#{product}" />
-                </p:selectOneMenu>
+                    <p:row>
+                        <p:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
+                            <f:selectItems value="#{invoicesBean.products}" var="product"
+                                           itemLabel="#{product.name}" itemValue="#{product}" />
+                        </p:selectOneMenu>
 
-                <p:commandButton value="#{msg['protected.invoices.product.add']}" update=":addForm"
-                                 action="#{invoicesBean.addProduct}">
-                    <f:ajax render=":addForm" />
-                </p:commandButton>
-            </p:row>
+                        <p:commandButton value="#{msg['protected.invoices.product.add']}" update=":addForm"
+                                         action="#{invoicesBean.addProduct}">
+                            <f:ajax render=":addForm" />
+                        </p:commandButton>
+                    </p:row>
 
-            <ui:repeat value="#{invoicesBean.entity.products}" var="value">
-                <h:outputText value="#{value.product.name}" styleClass="text2" />
+                    <ui:repeat value="#{invoicesBean.entity.products}" var="value">
+                        <h:outputText value="#{value.product.name}" styleClass="text2" />
 
-                <p:outputLabel value="#{msg['protected.invoices.product.count']}" styleClass="short">
-                    <p:inputText value="#{value.count}" rendered="true"
-                                 label="#{msg['protected.invoices.product.count']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.count']}" styleClass="short">
+                            <p:inputText value="#{value.count}" rendered="true"
+                                         label="#{msg['protected.invoices.product.count']}" />
+                        </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.invoices.product.price']}" styleClass="short">
-                    <p:inputText value="#{value.price}" rendered="true"
-                                 label="#{msg['protected.invoices.product.price']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.price']}" styleClass="short">
+                            <p:inputText value="#{value.price}" rendered="true"
+                                         label="#{msg['protected.invoices.product.price']}" />
+                        </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.invoices.product.tax']}" styleClass="short">
-                    <p:inputText value="#{value.tax}" rendered="true"
-                                 label="#{msg['protected.invoices.product.tax']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.tax']}" styleClass="short">
+                            <p:inputText value="#{value.tax}" rendered="true"
+                                         label="#{msg['protected.invoices.product.tax']}" />
+                        </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.invoices.product.warranty']}" styleClass="short">
-                    <p:inputText value="#{value.warranty}" rendered="true"
-                                 label="#{msg['protected.invoices.product.warranty']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.warranty']}" styleClass="short">
+                            <p:inputText value="#{value.warranty}" rendered="true"
+                                         label="#{msg['protected.invoices.product.warranty']}" />
+                        </p:outputLabel>
 
-                <p:commandButton value="#{msg['protected.invoices.product.remove']}" update=":addForm"
-                                 action="#{invoicesBean.removeProduct(value)}">
-                    <f:ajax render=":addForm" />
-                </p:commandButton>
+                        <p:commandButton value="#{msg['protected.invoices.product.remove']}" update=":addForm"
+                                         action="#{invoicesBean.removeProduct(value)}">
+                            <f:ajax render=":addForm" />
+                        </p:commandButton>
 
-                <br />
-            </ui:repeat>
+                        <br />
+                    </ui:repeat>
 
-            <f:facet name="footer">
-                <p:commandButton value="#{msg['layout.crud.save']}" update=":list addMessages"
-                                 oncomplete="handleClose(xhr, status, args, addDialogWidget)"
-                                 action="#{invoicesBean.saveEntity}" />
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list addMessages"
+                                         oncomplete="handleClose(xhr, status, args, addDialogWidget)"
+                                         action="#{invoicesBean.saveEntity}" />
 
-                <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
-                                 onsuccess="addDialogWidget.hide()"
-                                 action="#{invoicesBean.hideAddDialog}" />
-            </f:facet>
-        </p:panelGrid>
-    </h:form>
-</p:dialog>
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="addDialogWidget.hide()" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
 
-<p:dialog id="editDialog" header="#{msg['protected.invoices.edit_title']}" widgetVar="editDialogWidget"
-          resizable="false" modal="true" closable="false">
+        <p:dialog id="editDialog" header="#{msg['protected.invoices.edit_title']}" widgetVar="editDialogWidget"
+                  resizable="false" modal="true" closable="false" dynamic="true">
 
-    <h:form id="editForm" styleClass="b-form" rendered="#{invoicesBean.editDialogDisplayed}">
-        <p:messages id="editMessages" />
+            <h:form id="editForm" styleClass="b-form">
+                <p:messages id="editMessages" />
 
-        <p:panelGrid columns="1">
-            <p:outputLabel value="#{msg['protected.invoices.client']}">
-                <p:selectOneMenu value="#{invoicesBean.entity.client}"
-                                 converter="#{clientTypeConverter}"
-                                 label="#{msg['protected.invoices.client']}">
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="#{msg['protected.invoices.client']}">
+                        <p:selectOneMenu value="#{invoicesBean.entity.client}"
+                                         converter="#{clientTypeConverter}"
+                                         label="#{msg['protected.invoices.client']}">
 
-                    <f:selectItems value="#{invoicesBean.clients}" var="client"
-                                   itemLabel="#{client.name}" itemValue="#{client}" />
-                </p:selectOneMenu>
-            </p:outputLabel>
+                            <f:selectItems value="#{invoicesBean.clients}" var="client"
+                                           itemLabel="#{client.name}" itemValue="#{client}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.type']}">
-                <p:selectOneMenu value="#{invoicesBean.entity.type}"
-                                 label="#{msg['protected.invoices.type']}">
+                    <p:outputLabel value="#{msg['protected.invoices.type']}">
+                        <p:selectOneMenu value="#{invoicesBean.entity.type}"
+                                         label="#{msg['protected.invoices.type']}">
 
-                    <f:selectItems value="#{invoicesBean.types}" var="type"
-                                   itemLabel="#{type[1]}" itemValue="#{type[0]}" />
-                </p:selectOneMenu>
-            </p:outputLabel>
+                            <f:selectItems value="#{invoicesBean.types}" var="type"
+                                           itemLabel="#{type[1]}" itemValue="#{type[0]}" />
+                        </p:selectOneMenu>
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.create_date']}">
-                <p:calendar value="#{invoicesBean.entity.createDate}"
-                            label="#{msg['protected.invoices.create_date']}"
-                            required="true" pattern="#{invoicesBean.dateFormat}" />
-            </p:outputLabel>
+                    <p:outputLabel value="#{msg['protected.invoices.create_date']}">
+                        <p:calendar value="#{invoicesBean.entity.createDate}"
+                                    label="#{msg['protected.invoices.create_date']}"
+                                    required="true" pattern="#{invoicesBean.dateFormat}" />
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.end_date']}">
-                <p:calendar value="#{invoicesBean.entity.endDate}"
-                            label="#{msg['protected.invoices.end_date']}"
-                            required="true" pattern="#{invoicesBean.dateFormat}" />
-            </p:outputLabel>
+                    <p:outputLabel value="#{msg['protected.invoices.end_date']}">
+                        <p:calendar value="#{invoicesBean.entity.endDate}"
+                                    label="#{msg['protected.invoices.end_date']}"
+                                    required="true" pattern="#{invoicesBean.dateFormat}" />
+                    </p:outputLabel>
 
-            <p:outputLabel value="#{msg['protected.invoices.comment']}">
-                <p:inputTextarea value="#{invoicesBean.entity.comment}"
-                                 label="#{msg['protected.invoices.comment']}" />
-            </p:outputLabel>
+                    <p:outputLabel value="#{msg['protected.invoices.comment']}">
+                        <p:inputTextarea value="#{invoicesBean.entity.comment}"
+                                         label="#{msg['protected.invoices.comment']}" />
+                    </p:outputLabel>
 
-            <p:row>
-                <p:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
-                    <f:selectItems value="#{invoicesBean.products}" var="product"
-                                   itemLabel="#{product.name}" itemValue="#{product}" />
-                </p:selectOneMenu>
+                    <p:row>
+                        <p:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
+                            <f:selectItems value="#{invoicesBean.products}" var="product"
+                                           itemLabel="#{product.name}" itemValue="#{product}" />
+                        </p:selectOneMenu>
 
-                <p:commandButton value="#{msg['protected.invoices.product.add']}" update=":editForm"
-                                 action="#{invoicesBean.addProduct}">
-                    <f:ajax render=":editForm" />
-                </p:commandButton>
-            </p:row>
+                        <p:commandButton value="#{msg['protected.invoices.product.add']}" update=":editForm"
+                                         action="#{invoicesBean.addProduct}">
+                            <f:ajax render=":editForm" />
+                        </p:commandButton>
+                    </p:row>
 
-            <ui:repeat value="#{invoicesBean.entity.products}" var="value">
-                <h:outputText value="#{value.product.name}" styleClass="text2" />
+                    <ui:repeat value="#{invoicesBean.entity.products}" var="value">
+                        <h:outputText value="#{value.product.name}" styleClass="text2" />
 
-                <p:outputLabel value="#{msg['protected.invoices.product.count']}" styleClass="short">
-                    <p:inputText value="#{value.count}" rendered="true"
-                                 label="#{msg['protected.invoices.product.count']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.count']}" styleClass="short">
+                            <p:inputText value="#{value.count}" rendered="true"
+                                         label="#{msg['protected.invoices.product.count']}" />
+                        </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.invoices.product.price']}" styleClass="short">
-                    <p:inputText value="#{value.price}" rendered="true"
-                                 label="#{msg['protected.invoices.product.price']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.price']}" styleClass="short">
+                            <p:inputText value="#{value.price}" rendered="true"
+                                         label="#{msg['protected.invoices.product.price']}" />
+                        </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.invoices.product.tax']}" styleClass="short">
-                    <p:inputText value="#{value.tax}" rendered="true"
-                                 label="#{msg['protected.invoices.product.tax']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.tax']}" styleClass="short">
+                            <p:inputText value="#{value.tax}" rendered="true"
+                                         label="#{msg['protected.invoices.product.tax']}" />
+                        </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.invoices.product.warranty']}" styleClass="short">
-                    <p:inputText value="#{value.warranty}" rendered="true"
-                                 label="#{msg['protected.invoices.product.warranty']}" />
-                </p:outputLabel>
+                        <p:outputLabel value="#{msg['protected.invoices.product.warranty']}" styleClass="short">
+                            <p:inputText value="#{value.warranty}" rendered="true"
+                                         label="#{msg['protected.invoices.product.warranty']}" />
+                        </p:outputLabel>
 
-                <p:commandButton value="#{msg['protected.invoices.product.remove']}" update=":editForm"
-                                 action="#{invoicesBean.removeProduct(value)}">
-                    <f:ajax render=":editForm" />
-                </p:commandButton>
+                        <p:commandButton value="#{msg['protected.invoices.product.remove']}" update=":editForm"
+                                         action="#{invoicesBean.removeProduct(value)}">
+                            <f:ajax render=":editForm" />
+                        </p:commandButton>
 
-                <br />
-            </ui:repeat>
+                        <br />
+                    </ui:repeat>
 
-            <f:facet name="footer">
-                <p:commandButton value="#{msg['layout.crud.save']}" update=":list :editForm editMessages"
-                                 oncomplete="handleClose(xhr, status, args, editDialogWidget)"
-                                 action="#{invoicesBean.saveEntity}" />
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.save']}" update=":list :editForm editMessages"
+                                         oncomplete="handleClose(xhr, status, args, editDialogWidget)"
+                                         action="#{invoicesBean.saveEntity}" />
 
-                <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
-                                 onsuccess="editDialogWidget.hide()" action="#{invoicesBean.hideEditDialog}" />
-            </f:facet>
-        </p:panelGrid>
-    </h:form>
-</p:dialog>
+                        <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
+                                         onsuccess="editDialogWidget.hide()" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
 
-<p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
-          resizable="false" modal="true" closable="false">
+        <p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
+                  resizable="false" modal="true" closable="false" dynamic="true">
 
-    <h:form id="deleteForm" rendered="#{invoicesBean.deleteDialogDisplayed}">
-        <p:panelGrid columns="1">
-            <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
-            <h:outputText value="#{msg['protected.invoices.id']} #{invoicesBean.entity.id}" />
+            <h:form id="deleteForm">
+                <p:panelGrid columns="1">
+                    <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
+                    <h:outputText value="#{msg['protected.invoices.id']} #{invoicesBean.entity.id}" />
 
-            <f:facet name="footer">
-                <p:commandButton value="#{msg['layout.crud.yes']}" update=":list :deleteForm"
-                                 onsuccess="deleteDialogWidget.hide()"
-                                 action="#{invoicesBean.deleteEntity}" />
+                    <f:facet name="footer">
+                        <p:commandButton value="#{msg['layout.crud.yes']}" update=":list :deleteForm"
+                                         onsuccess="deleteDialogWidget.hide()"
+                                         action="#{invoicesBean.deleteEntity}" />
 
-                <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
-                                 onsuccess="deleteDialogWidget.hide()"
-                                 action="#{invoicesBean.hideDeleteDialog}" />
-            </f:facet>
-        </p:panelGrid>
-    </h:form>
-</p:dialog>
-</ui:define>
+                        <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
+                                         onsuccess="deleteDialogWidget.hide()" />
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    </ui:define>
 </ui:composition>

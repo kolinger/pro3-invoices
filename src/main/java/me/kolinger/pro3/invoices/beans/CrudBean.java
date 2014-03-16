@@ -11,9 +11,6 @@ public abstract class CrudBean<T> extends AbstractBean {
     private LazyDataModel<T> lazyDataModel;
     private AbstractService<T> service;
     private T entity;
-    private Boolean addDialogDisplayed = false;
-    private Boolean editDialogDisplayed = false;
-    private Boolean deleteDialogDisplayed = false;
 
     public CrudBean(AbstractService<T> service) {
         this.service = service;
@@ -32,48 +29,15 @@ public abstract class CrudBean<T> extends AbstractBean {
         return lazyDataModel;
     }
 
-    public Boolean getAddDialogDisplayed() {
-        return addDialogDisplayed;
-    }
-
-    public Boolean getEditDialogDisplayed() {
-        return editDialogDisplayed;
-    }
-
-    public Boolean getDeleteDialogDisplayed() {
-        return deleteDialogDisplayed;
-    }
-
-    public void showAddDialog() {
-        addDialogDisplayed = true;
+    public void createNew() {
         entity = service.createNew();
     }
 
-    public void hideAddDialog() {
-        addDialogDisplayed = false;
-    }
-
-    public void showEditDialog(T entity) {
-        editDialogDisplayed = true;
+    public void selectEntity(T entity) {
         this.entity = entity;
-    }
-
-    public void hideEditDialog() {
-        editDialogDisplayed = false;
-    }
-
-    public void showDeleteDialog(T entity) {
-        deleteDialogDisplayed = true;
-        this.entity = entity;
-    }
-
-    public void hideDeleteDialog() {
-        deleteDialogDisplayed = false;
     }
 
     public void saveEntity() {
-        editDialogDisplayed = false;
-        addDialogDisplayed = false;
         service.save(entity);
     }
 

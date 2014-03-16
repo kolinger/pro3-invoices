@@ -9,7 +9,7 @@
 
     <ui:define name="content">
         <h:form id="buttons">
-            <p:commandButton value="#{msg['protected.permissions.create']}" action="#{permissionsBean.showAddDialog}"
+            <p:commandButton value="#{msg['protected.permissions.create']}" action="#{permissionsBean.createNew}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
         </h:form>
 
@@ -58,19 +58,19 @@
                 <p:column headerText="#{msg['layout.crud.actions']}">
                     <p:commandButton oncomplete="editDialogWidget.show()" icon="ui-icon-pencil"
                                      value="#{msg['layout.crud.edit']}"
-                                     update=":editDialog" action="#{permissionsBean.showEditDialog(row)}" />
+                                     update=":editDialog" action="#{permissionsBean.selectEntity(row)}" />
 
                     <p:commandButton oncomplete="deleteDialogWidget.show()" icon="ui-icon-trash"
                                      value="#{msg['layout.crud.delete']}"
-                                     update=":deleteDialog" action="#{permissionsBean.showDeleteDialog(row)}" />
+                                     update=":deleteDialog" action="#{permissionsBean.selectEntity(row)}" />
                 </p:column>
             </p:dataTable>
         </h:form>
 
         <p:dialog id="addDialog" header="#{msg['protected.permissions.create_title']}" widgetVar="addDialogWidget"
-                  resizable="false" modal="true" closable="false">
+                  resizable="false" modal="true" closable="false" dynamic="true">
 
-            <h:form id="addForm" styleClass="b-form" rendered="#{permissionsBean.addDialogDisplayed}">
+            <h:form id="addForm" styleClass="b-form">
                 <p:messages id="addMessages" />
 
                 <p:panelGrid columns="1">
@@ -126,17 +126,16 @@
                                          action="#{permissionsBean.saveEntity}" />
 
                         <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
-                                         onsuccess="addDialogWidget.hide()"
-                                         action="#{permissionsBean.hideAddDialog}" />
+                                         onsuccess="addDialogWidget.hide()" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>
         </p:dialog>
 
         <p:dialog id="editDialog" header="#{msg['protected.permissions.edit_title']}" widgetVar="editDialogWidget"
-                  resizable="false" modal="true" closable="false">
+                  resizable="false" modal="true" closable="false" dynamic="true">
 
-            <h:form id="editForm" styleClass="b-form" rendered="#{permissionsBean.editDialogDisplayed}">
+            <h:form id="editForm" styleClass="b-form">
                 <p:messages id="editMessages" />
 
                 <p:panelGrid columns="1">
@@ -184,16 +183,16 @@
                                          action="#{permissionsBean.saveEntity}" />
 
                         <p:commandButton value="#{msg['layout.crud.cancel']}" immediate="true"
-                                         onsuccess="editDialogWidget.hide()" action="#{permissionsBean.hideEditDialog}" />
+                                         onsuccess="editDialogWidget.hide()" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>
         </p:dialog>
 
         <p:dialog id="deleteDialog" header="#{msg['layout.crud.delete_dialog']}" widgetVar="deleteDialogWidget"
-                  resizable="false" modal="true" closable="false">
+                  resizable="false" modal="true" closable="false" dynamic="true">
 
-            <h:form id="deleteForm" rendered="#{permissionsBean.deleteDialogDisplayed}">
+            <h:form id="deleteForm">
                 <p:panelGrid columns="1">
                     <h:outputText value="#{msg['layout.crud.delete_dialog.disclaimer']}" />
                     <h:outputText value="#{msg['protected.permissions.company']}: #{permissionsBean.entity.company.name}" />
@@ -205,8 +204,7 @@
                                          action="#{permissionsBean.deleteEntity}" />
 
                         <p:commandButton value="#{msg['layout.crud.no']}" immediate="true"
-                                         onsuccess="deleteDialogWidget.hide()"
-                                         action="#{permissionsBean.hideDeleteDialog}" />
+                                         onsuccess="deleteDialogWidget.hide()" />
                     </f:facet>
                 </p:panelGrid>
             </h:form>
