@@ -14,7 +14,7 @@
         </h:form>
 
         <h:form id="list">
-            <p:dataTable var="row" value="#{invoicesBean.lazyDataModel}" sortMode="multiple" paginator="true"
+            <p:dataTable var="row" value="#{invoicesBean.extendedLazyDataModel}" sortMode="multiple" paginator="true"
                          paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
 
                 <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.invoices.company']}">
@@ -37,8 +37,12 @@
                                   rendered="#{row.type.ordinal() == 1}" />
                 </p:column>
 
-                <p:column headerText="#{msg['protected.invoices.amount']}">
-                    <h:outputText value="todo" />
+                <p:column sortBy="#{row.amount}" headerText="#{msg['protected.invoices.amount']}">
+                    <h:outputText value="#{invoicesBean.round(row.amount)}" />
+                </p:column>
+
+                <p:column sortBy="#{row.payed}" headerText="#{msg['protected.invoices.payed']}">
+                    <h:outputText value="#{invoicesBean.round(row.payed)}" />
                 </p:column>
 
                 <p:column sortBy="#{row.createDate}" headerText="#{msg['protected.invoices.create_date']}">
