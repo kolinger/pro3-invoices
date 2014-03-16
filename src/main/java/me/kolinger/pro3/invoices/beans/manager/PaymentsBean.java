@@ -3,7 +3,6 @@ package me.kolinger.pro3.invoices.beans.manager;
 import me.kolinger.pro3.invoices.beans.CrudBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import me.kolinger.pro3.invoices.model.impl.entities.Invoice;
-import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import me.kolinger.pro3.invoices.model.impl.entities.Payment;
 import me.kolinger.pro3.invoices.model.impl.services.InvoicesService;
 import me.kolinger.pro3.invoices.model.impl.services.PaymentsService;

@@ -17,9 +17,9 @@
 
     <ui:define name="userPanel">
         <p>
-            <h:outputText value="#{msg['layout.logged']} #{protectedGlobalBean.loggedManager.username}" />
+            <h:outputText value="#{msg['layout.logged']} #{globalBean.loggedManager.username}" />
             |
-            <h:outputLink value="#{request.contextPath}/protected/logout/">
+            <h:outputLink value="#{request.contextPath}/protected/logout">
                 <h:outputText value="#{msg['layout.logout']}" />
             </h:outputLink>
         </p>
@@ -29,32 +29,32 @@
         <nav class="navbar navbar-default">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
                 <ul class="nav navbar-nav">
-                    <li class="#{protectedGlobalBean.currentViewId == 'companies' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'companies' ? 'active' : ''}">
                         <pretty:link mappingId="companies">
                             <h:outputText value="#{msg['protected.companies.navigation_title']}" />
                         </pretty:link>
                     </li>
-                    <li class="#{protectedGlobalBean.currentViewId == 'permissions' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'permissions' ? 'active' : ''}">
                         <pretty:link mappingId="permissions">
                             <h:outputText value="#{msg['protected.permissions.navigation_title']}" />
                         </pretty:link>
                     </li>
-                    <li class="#{protectedGlobalBean.currentViewId == 'clients' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'clients' ? 'active' : ''}">
                         <pretty:link mappingId="clients">
                             <h:outputText value="#{msg['protected.clients.navigation_title']}" />
                         </pretty:link>
                     </li>
-                    <li class="#{protectedGlobalBean.currentViewId == 'invoices' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'invoices' ? 'active' : ''}">
                         <pretty:link mappingId="invoices">
                             <h:outputText value="#{msg['protected.invoices.navigation_title']}" />
                         </pretty:link>
                     </li>
-                    <li class="#{protectedGlobalBean.currentViewId == 'products' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'products' ? 'active' : ''}">
                         <pretty:link mappingId="products">
                             <h:outputText value="#{msg['protected.products.navigation_title']}" />
                         </pretty:link>
                     </li>
-                    <li class="#{protectedGlobalBean.currentViewId == 'payments' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'payments' ? 'active' : ''}">
                         <pretty:link mappingId="payments">
                             <h:outputText value="#{msg['protected.payments.navigation_title']}" />
                         </pretty:link>

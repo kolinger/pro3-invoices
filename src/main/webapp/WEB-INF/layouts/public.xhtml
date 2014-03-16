@@ -31,17 +31,17 @@
         <nav class="navbar navbar-default">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
                 <ul class="nav navbar-nav">
-                    <li class="#{protectedGlobalBean.currentViewId == 'index' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'index' ? 'active' : ''}">
                         <pretty:link mappingId="index">
                             <h:outputText value="#{msg['public.index.navigation_title']}" />
                         </pretty:link>
                     </li>
-                    <li class="#{protectedGlobalBean.currentViewId == 'registration' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'registration' ? 'active' : ''}">
                         <pretty:link mappingId="registration">
                             <h:outputText value="#{msg['public.registration.navigation_title']}" />
                         </pretty:link>
                     </li>
-                    <li class="#{protectedGlobalBean.currentViewId == 'login' ? 'active' : ''}">
+                    <li class="#{globalBean.currentViewId == 'login' ? 'active' : ''}">
                         <pretty:link mappingId="login">
                             <h:outputText value="#{msg['public.login.navigation_title']}" />
                         </pretty:link>
