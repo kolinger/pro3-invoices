@@ -42,7 +42,7 @@
     </url-mapping>
 
     <url-mapping id="invoices">
-        <pattern value="/protected/invoices_" />
+        <pattern value="/protected/invoice" /><!-- why is invoices automatically redirected to invoices/? -->
         <view-id value="/protected/invoices.xhtml" />
     </url-mapping>
 

@@ -141,3 +141,11 @@ table tr td {
 	border-bottom: 1px solid #000;
 	float: left;
 }
+
+.ui-datatable-data td {
+    overflow: visible !important;
+}
+
+.btn-group {
+    margin-right: 5px;
+}
