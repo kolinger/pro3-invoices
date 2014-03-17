@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b1052012-04af-457b-b8b1-5a3ed04cd742">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="company_name_label" class="java.lang.String"/>
+	<parameter name="company_name_value" class="java.lang.String"/>
+	<parameter name="company_address_value" class="java.lang.String"/>
+	<parameter name="company_address_label" class="java.lang.String"/>
+	<parameter name="company_in_value" class="java.lang.String"/>
+	<parameter name="company_in_label" class="java.lang.String"/>
+	<parameter name="company_vat_id_value" class="java.lang.String"/>
+	<parameter name="company_vat_id_label" class="java.lang.String"/>
+	<parameter name="company_register_value" class="java.lang.String"/>
+	<parameter name="company_email_value" class="java.lang.String"/>
+	<parameter name="company_email_label" class="java.lang.String"/>
+	<parameter name="company_phone_value" class="java.lang.String"/>
+	<parameter name="company_phone_label" class="java.lang.String"/>
+	<parameter name="company_website_value" class="java.lang.String"/>
+	<parameter name="company_website_label" class="java.lang.String"/>
+	<parameter name="code_label" class="java.lang.String"/>
+	<parameter name="name_label" class="java.lang.String"/>
+	<parameter name="count_label" class="java.lang.String"/>
+	<parameter name="price_label" class="java.lang.String"/>
+	<parameter name="tax_label" class="java.lang.String"/>
+	<parameter name="tax_percent_label" class="java.lang.String"/>
+	<parameter name="price_sum_label" class="java.lang.String"/>
+	<parameter name="warranty_label" class="java.lang.String"/>
+	<parameter name="total_sum_label" class="java.lang.String"/>
+	<parameter name="round_label" class="java.lang.String"/>
+	<parameter name="final_sum_label" class="java.lang.String"/>
+	<parameter name="bank_account_label" class="java.lang.String"/>
+	<parameter name="bank_account_value" class="java.lang.String"/>
+	<parameter name="id_label" class="java.lang.String"/>
+	<parameter name="id_value" class="java.lang.Long"/>
+	<parameter name="date_created_value" class="java.lang.String"/>
+	<parameter name="date_created_label" class="java.lang.String"/>
+	<parameter name="date_end_label" class="java.lang.String"/>
+	<parameter name="date_end_value" class="java.lang.String"/>
+	<parameter name="buyer_name_label" class="java.lang.String"/>
+	<parameter name="buyer_name_value" class="java.lang.String"/>
+	<parameter name="buyer_address_label" class="java.lang.String"/>
+	<parameter name="buyer_address_value" class="java.lang.String"/>
+	<parameter name="buyer_in_value" class="java.lang.String"/>
+	<parameter name="buyer_in_label" class="java.lang.String"/>
+	<parameter name="buyer_vat_id_value" class="java.lang.String"/>
+	<parameter name="buyer_vat_id_label" class="java.lang.String"/>
+	<parameter name="buyer_email_value" class="java.lang.String"/>
+	<parameter name="buyer_email_label" class="java.lang.String"/>
+	<parameter name="buyer_phone_label" class="java.lang.String"/>
+	<parameter name="buyer_phone_value" class="java.lang.String"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="price" class="java.math.BigDecimal"/>
+	<field name="count" class="java.lang.Integer"/>
+	<field name="tax" class="java.math.BigDecimal"/>
+	<field name="warranty" class="java.lang.Integer"/>
+	<field name="taxPercent" class="java.lang.Integer"/>
+	<field name="sum" class="java.math.BigDecimal"/>
+	<variable name="sum_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="302" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="66" uuid="0b4d1a16-d4cf-4229-87da-a0e98f0fc01d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="66" width="152" height="24" uuid="a9df4d9a-7691-4206-8d69-5512e2569cf4"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_name_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="66" width="134" height="24" uuid="b11e3b15-b3bf-4218-93e5-cc64e88ee685"/>
+				<textElement>
+					<font size="10" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_name_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="90" width="152" height="24" uuid="860516a0-8b2a-42fe-83bd-5da6f6ee5d87"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_address_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="145" width="152" height="24" uuid="e5411dfe-e650-4894-a8f6-6e88ab327605"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_vat_id_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="121" width="152" height="24" uuid="9fee87b7-bfac-4548-86a2-f19b6beaa47d"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_in_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="203" width="152" height="24" uuid="0fa5d69d-99bd-4da7-bda3-2209645b41be"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_email_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="227" width="152" height="24" uuid="a5e1198e-5096-4465-ba0e-48d141b616ee"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_phone_label}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="152" y="90" width="134" height="31" uuid="0bd0db90-b062-45b1-aabc-2909c4d3c08a"/>
+				<textElement>
+					<font size="10" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_address_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="121" width="134" height="24" uuid="63a67b54-4d81-4d88-a72c-a9f424399779"/>
+				<textElement>
+					<font size="10" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_in_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="145" width="134" height="24" uuid="e699e07c-6ffd-4e67-b87a-d876620aef19"/>
+				<textElement>
+					<font size="10" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_vat_id_value}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="169" width="286" height="34" uuid="d06b9a8c-b58c-483d-8ea7-55951d0c3f8e"/>
+				<textElement>
+					<font size="10" isBold="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_register_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="203" width="134" height="24" uuid="05effce6-a461-45e6-b882-7ae5cb996ca7"/>
+				<textElement>
+					<font size="10" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_email_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="227" width="134" height="24" uuid="172b058f-82f3-40ea-bbb1-6b656628301f"/>
+				<textElement>
+					<font size="10" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_phone_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="251" width="152" height="24" uuid="8cf154ca-22ff-487e-8cd3-746e483ee8ac"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_website_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="251" width="134" height="24" uuid="44f9d96e-6d41-4944-838d-456d7fdf1b61"/>
+				<textElement>
+					<font size="10" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{company_website_value}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="294" width="555" height="1" uuid="c265958a-86b7-4e40-af8d-2712ba771e96"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="66" width="117" height="20" uuid="078dbdf6-e6a5-4b46-82b0-f3cec301ca07"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{bank_account_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="86" width="117" height="20" uuid="a95eb823-b987-46fe-b449-1079e8617e2b"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="66" width="135" height="20" uuid="f9ff5492-ac0f-458c-9917-2c9eb4e4cd58"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{bank_account_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="86" width="135" height="20" uuid="0bc5df7a-29ad-407f-b630-ba10ed34d8ac"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="114" width="135" height="20" uuid="e2d63ebd-37a5-4606-802d-6c87fd06ce1b"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date_created_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="114" width="117" height="20" uuid="69267596-4cba-4285-aafd-1d3cf727a8d5"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date_created_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="134" width="117" height="20" uuid="fbf55d9f-3cfc-433e-aa02-286df79b7689"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date_end_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="134" width="135" height="20" uuid="32963fb3-0dad-4e7d-8e07-8aa29d4ac894"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date_end_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="162" width="117" height="20" uuid="27da3d57-82be-49e2-b022-173ab9fb6fd6"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_name_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="162" width="135" height="20" uuid="d20a2833-11b1-4523-ad87-4e4cdab1d9e5"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_name_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="182" width="117" height="20" uuid="fa2d0b75-1b00-4ca1-aa3d-cfd8f33afdd1"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_address_label}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="420" y="182" width="135" height="28" uuid="1be3400f-19ff-4135-b5cb-a84b2becd674"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_address_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="210" width="135" height="20" uuid="c568c071-e0ab-49b9-939a-5d8e583dcfc3"/>
+				<textElement>
+					<font size="10" isBold="false" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_in_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="210" width="117" height="20" uuid="acc75207-8737-47ff-becb-da73673301b3"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_in_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="230" width="135" height="20" uuid="f0e44a95-005b-4cca-b935-94842323b8f7"/>
+				<textElement>
+					<font size="10" isBold="false" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_vat_id_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="228" width="117" height="20" uuid="18b19ba4-4a9f-4937-975c-d5b4e72357e8"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_vat_id_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="250" width="135" height="20" uuid="598db656-4ef3-4881-9723-78d8f17a0ebf"/>
+				<textElement>
+					<font size="10" isBold="false" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_email_value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="248" width="117" height="20" uuid="e3b86695-e63c-4bda-b163-35f35ff878a6"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_email_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="268" width="117" height="20" uuid="96ec81a1-7770-430f-bdbf-b20180c195df"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_phone_label}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="268" width="135" height="20" uuid="f545dd29-745d-4678-ab28-6c37adcb7ab9"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buyer_phone_value}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="14" width="63" height="20" uuid="2e2de8ab-3627-4f17-862d-f8019f9ff89e"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{code_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="14" width="83" height="20" uuid="5c0d5323-5b83-4fe9-9261-31a38fab24cb"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="14" width="59" height="20" uuid="f02fa251-2007-463f-bf0c-f7c75146c88c"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{count_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="14" width="72" height="20" uuid="759f45f0-e01b-423c-81f4-2d10343e4082"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{price_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="14" width="73" height="20" uuid="074b2608-c4ee-4322-a97c-cf66e4565fb7"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tax_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="14" width="72" height="20" uuid="bf6edd84-1a2d-41bd-9f3f-4bd53c4699cd"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{warranty_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="14" width="63" height="20" uuid="1ee4bc57-5164-4bed-bb91-1ae060cc1e97"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{price_sum_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="14" width="70" height="20" uuid="0ee12aa0-e827-49bf-a77d-5f962db4f839"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tax_percent_label}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="63" height="20" uuid="7374c73b-33b6-4ad7-a3f3-747ec1fedc71"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="83" height="20" uuid="063b7c31-2321-4ef3-bc04-9e381fdcd614"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="0" width="72" height="20" uuid="0865c798-b2f7-467b-ba50-abfea63f7a83"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="70" height="20" uuid="757d6a8e-6515-4844-8956-05fee4cfb482"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{taxPercent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="0" width="72" height="20" uuid="a903eef8-9fdc-40c1-be5a-37ae2991870a"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{warranty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="0" width="59" height="20" uuid="d3489088-7cae-46c5-8f7b-e5a2b7056092"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="63" height="20" uuid="3fcb0702-55d7-4cf3-83ee-fc87ba6ac580"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="0" width="73" height="20" uuid="f2dca0f1-518e-4ce3-ab76-cdf2582be436"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tax}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="98" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="13" width="555" height="1" uuid="9e7f55ae-f0b7-4bef-9c06-b7ee1ea55bf2"/>
+			</line>
+			<textField>
+				<reportElement x="455" y="25" width="100" height="20" uuid="fab39810-afca-487c-98ae-d458550f2258"/>
+				<textElement textAlignment="Right">
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum_1}.setScale(2)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="45" width="100" height="20" uuid="7ddd234e-313a-4afe-8b70-caa06bf4b2d1"/>
+				<textElement textAlignment="Right">
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new BigDecimal($V{sum_1}.toBigInteger()).subtract($V{sum_1})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="65" width="100" height="20" uuid="500ff345-f71c-40a4-a36e-82a9381c8023"/>
+				<textElement textAlignment="Right">
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum_1}.add(new BigDecimal($V{sum_1}.toBigInteger()).subtract($V{sum_1}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="25" width="152" height="20" uuid="e8efe2e7-1d06-45d9-a2c2-883eff604b92"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_sum_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="45" width="152" height="20" uuid="3527db53-0b7d-4257-bc8f-8e48315d1631"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{round_label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="65" width="152" height="20" uuid="f1d025ca-e66d-40f3-9236-3e5e4945efee"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{final_sum_label}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
