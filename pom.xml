@@ -168,6 +168,13 @@
             <artifactId>logback-classic</artifactId>
             <version>1.0.13</version>
         </dependency>
+
+        <!-- reports -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>5.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>

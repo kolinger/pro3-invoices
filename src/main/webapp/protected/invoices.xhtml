@@ -10,7 +10,7 @@
     <ui:define name="content">
         <h:form id="buttons">
             <p:commandButton value="#{msg['protected.invoices.create']}" action="#{invoicesBean.createNew}"
-                             update=":addDialog" oncomplete="addDialogWidget.show()" />
+                             update=":addDialog" oncomplete="addDialogWidget.show();resizeDialog(addDialogWidget);" />
         </h:form>
 
         <h:form id="list">
@@ -58,11 +58,34 @@
                 </p:column>
 
                 <p:column headerText="#{msg['layout.crud.actions']}">
-                    <p:commandButton oncomplete="editDialogWidget.show()" icon="ui-icon-pencil"
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <h:outputText value="#{msg['protected.invoices.export']}" /> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h:outputLink value="#{request.contextPath}/protected/invoice-report/#{row.id}/pdf">
+                                    <h:outputText value="#{msg['protected.invoices.export.pdf']}" />
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="#{request.contextPath}/protected/invoice-report/#{row.id}/html">
+                                    <h:outputText value="#{msg['protected.invoices.export.html']}" />
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="#{request.contextPath}/protected/invoice-report/#{row.id}/xlsx">
+                                    <h:outputText value="#{msg['protected.invoices.export.xlsx']}" />
+                                </h:outputLink>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p:commandButton oncomplete="editDialogWidget.show();resizeDialog(editDialogWidget);" icon="ui-icon-pencil"
                                      value="#{msg['layout.crud.edit']}"
                                      update=":editDialog" action="#{invoicesBean.selectEntity(row)}" />
 
-                    <p:commandButton oncomplete="deleteDialogWidget.show()" icon="ui-icon-trash"
+                    <p:commandButton oncomplete="deleteDialogWidget.show();resizeDialog(deleteDialogWidget);" icon="ui-icon-trash"
                                      value="#{msg['layout.crud.delete']}"
                                      update=":deleteDialog" action="#{invoicesBean.selectEntity(row)}" />
                 </p:column>
