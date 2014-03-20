@@ -23,6 +23,9 @@ public class InvoicesExtendedDao extends AbstractDao<InvoiceExtended> {
     protected Criteria createCriteria(Class clazz) {
         Criteria criteria = super.createCriteria(clazz);
 
+        // eager loading
+        criteria.createCriteria("client", "client");
+
         // security
         criteria.createCriteria("company", "company");
         criteria.createAlias("company.permissions", "permissions");
