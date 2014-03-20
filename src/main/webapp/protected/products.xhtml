@@ -25,19 +25,14 @@
                     <h:outputText value="#{row.name}" />
                 </p:column>
 
-                <p:column sortBy="#{row.count}" headerText="#{msg['protected.products.count']}">
-                    <h:outputText value="#{row.count}" rendered="#{row.count ge 0}" />
-                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.count lt 0}" />
-                </p:column>
-
                 <p:column sortBy="#{row.price}" headerText="#{msg['protected.products.price']}">
-                    <h:outputText value="#{row.price}" rendered="#{row.price ge 0}" />
-                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.price lt 0}" />
+                    <h:outputText value="#{row.price}" rendered="#{row.price != null}" />
+                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.price eq null}" />
                 </p:column>
 
                 <p:column sortBy="#{row.tax}" headerText="#{msg['protected.products.tax']}">
-                    <h:outputText value="#{row.tax}" rendered="#{row.tax ge 0}" />
-                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.tax lt 0}" />
+                    <h:outputText value="#{row.tax}" rendered="#{row.tax != null}" />
+                    <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.tax eq null}" />
                 </p:column>
 
                 <p:column headerText="#{msg['layout.crud.actions']}">
@@ -72,10 +67,6 @@
                     <p:outputLabel value="#{msg['protected.products.name']}">
                         <p:inputText value="#{productsBean.entity.name}" label="#{msg['protected.products.name']}"
                                      required="true" />
-                    </p:outputLabel>
-
-                    <p:outputLabel value="#{msg['protected.products.count']}">
-                        <p:inputText value="#{productsBean.entity.count}" label="#{msg['protected.products.count']}" />
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.products.price']}">
@@ -113,10 +104,6 @@
                     <p:outputLabel value="#{msg['protected.products.name']}">
                         <p:inputText value="#{productsBean.entity.name}" label="#{msg['protected.products.name']}"
                                      required="true" />
-                    </p:outputLabel>
-
-                    <p:outputLabel value="#{msg['protected.products.count']}">
-                        <p:inputText value="#{productsBean.entity.count}" label="#{msg['protected.products.count']}" />
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.products.price']}">

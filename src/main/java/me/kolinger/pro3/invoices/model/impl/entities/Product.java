@@ -23,16 +23,16 @@ public class Product extends DeletableEntity {
     private String name;
 
     @Column()
-    private Integer count = -1;
+    private Integer count;
 
     @Column()
-    private BigDecimal price = new BigDecimal(-1);
+    private BigDecimal price;
 
     @Column()
-    private Integer tax = -1;
+    private Integer tax;
 
     @Column()
-    private Integer warranty = -1;
+    private Integer warranty;
 
     @Column(columnDefinition = "TEXT")
     private String comment;
