@@ -49,7 +49,7 @@ public class Product extends DeletableEntity {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public BigDecimal getPrice() {
         return price;
     }
