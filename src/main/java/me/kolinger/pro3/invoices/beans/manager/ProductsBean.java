@@ -21,15 +21,12 @@ public class ProductsBean extends CrudBean<Product> {
     @Autowired
     public CompaniesService companiesService;
 
-    private ProductsService service;
-
     @Autowired
     public ProductsBean(ProductsService service) {
         super(service);
-        this.service = service;
     }
 
     public List<Company> getCompanies() {
-        return companiesService.findAll();
+        return companiesService.findAll("roleProducts");
     }
 }

@@ -27,6 +27,6 @@ public class ClientsBean extends CrudBean<Client> {
     }
 
     public List<Company> getCompanies() {
-        return companiesService.findAll();
+        return companiesService.findAll("roleClients");
     }
 }

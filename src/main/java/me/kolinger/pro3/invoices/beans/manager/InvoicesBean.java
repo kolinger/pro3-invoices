@@ -53,7 +53,7 @@ public class InvoicesBean extends CrudBean<Invoice> {
     }
 
     public List<Company> getCompanies() {
-        return companiesService.findAll();
+        return companiesService.findAll("roleInvoices");
     }
 
     public List<Client> getClients() {

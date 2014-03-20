@@ -22,8 +22,11 @@ public class CompaniesDao extends DeletableDao<Company> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Company> findAll() {
-        Criteria criteria = createCriteria();
+    public List<Company> findAll(String permissions) {
+        Criteria criteria = super.createCriteria(Company.class);
+        criteria.createAlias("permissions", "permissions");
+        criteria.add(Restrictions.eq("permissions.manager", Helper.getLoggedManager()));
+        criteria.add(Restrictions.eq("permissions." + permissions, true));
         criteria.addOrder(Order.asc("name"));
         return (List<Company>) criteria.list();
     }

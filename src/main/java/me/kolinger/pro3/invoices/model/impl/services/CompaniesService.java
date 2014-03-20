@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Tomáš Kolinger <tomas@kolinger.name>
  */
@@ -24,5 +26,10 @@ public class CompaniesService extends AbstractService<Company> {
     public CompaniesService(CompaniesDao dao) {
         super(dao);
         this.dao = dao;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Company> findAll(String permission) {
+        return dao.findAll(permission);
     }
 }

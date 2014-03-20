@@ -29,7 +29,7 @@ public class PermissionsDao extends AbstractDao<Permission> {
         // security
         criteria.createAlias("company.permissions", "permissions");
         criteria.add(Restrictions.eq("permissions.manager", Helper.getLoggedManager()));
-        criteria.add(Restrictions.eq("permissions.roleProducts", true));
+        criteria.add(Restrictions.eq("permissions.rolePermissions", true));
 
         return criteria;
     }

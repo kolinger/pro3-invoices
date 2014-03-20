@@ -47,7 +47,7 @@ public class PermissionsBean extends CrudBean<Permission> {
     }
 
     public List<Company> getCompanies() {
-        return companiesService.findAll();
+        return companiesService.findAll("rolePermissions");
     }
 
     public void managerValidator(FacesContext context, UIComponent toValidate, Object value) {
