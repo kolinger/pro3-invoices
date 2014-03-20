@@ -23,9 +23,6 @@ public class Product extends DeletableEntity {
     private String name;
 
     @Column()
-    private Integer count;
-
-    @Column()
     private BigDecimal price;
 
     @Column()
@@ -52,15 +49,7 @@ public class Product extends DeletableEntity {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
+    
     public BigDecimal getPrice() {
         return price;
     }
