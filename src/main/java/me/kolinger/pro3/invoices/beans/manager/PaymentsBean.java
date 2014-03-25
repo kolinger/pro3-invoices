@@ -23,13 +23,11 @@ public class PaymentsBean extends CrudBean<Payment> {
     @Autowired
     public InvoicesService invoicesService;
 
-    private PaymentsService service;
     private Long id;
 
     @Autowired
     public PaymentsBean(PaymentsService service) {
         super(service);
-        this.service = service;
     }
 
     public Long getId() {
@@ -44,7 +42,6 @@ public class PaymentsBean extends CrudBean<Payment> {
         if (value == null) {
             return;
         }
-        String username = value.toString();
         Invoice invoice = invoicesService.findOneById(id);
         if (invoice == null) {
             sendValidationError(Translator.translate("protected.payments.id.error_not_found"));
