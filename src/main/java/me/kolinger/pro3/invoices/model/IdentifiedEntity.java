@@ -33,7 +33,7 @@ public abstract class IdentifiedEntity extends LoggedObject implements Serializa
 
         IdentifiedEntity that = (IdentifiedEntity) o;
 
-        return !(id != null ? !id.equals(that.id) : that.id != null);
+        return that.getId().compareTo(getId()) == 0;
     }
 
     @Override
