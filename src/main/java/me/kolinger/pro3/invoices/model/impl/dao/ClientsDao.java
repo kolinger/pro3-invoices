@@ -3,6 +3,7 @@ package me.kolinger.pro3.invoices.model.impl.dao;
 import me.kolinger.pro3.invoices.common.Helper;
 import me.kolinger.pro3.invoices.model.DeletableDao;
 import me.kolinger.pro3.invoices.model.impl.entities.Client;
+import me.kolinger.pro3.invoices.model.impl.entities.Company;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -22,8 +23,10 @@ public class ClientsDao extends DeletableDao<Client> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Client> findAll() {
-        Criteria criteria = createCriteria();
+    public List<Client> findByCompany(Company company) {
+        Criteria criteria = super.createCriteria(getEntityClass());
+        criteria.createAlias("company", "company");
+        criteria.add(Restrictions.eq("company", company));
         criteria.addOrder(Order.asc("name"));
         return (List<Client>) criteria.list();
     }

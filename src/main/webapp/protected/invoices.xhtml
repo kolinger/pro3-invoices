@@ -90,6 +90,10 @@
                                      update=":deleteDialog" action="#{invoicesBean.selectEntity(row)}" />
                 </p:column>
             </p:dataTable>
+
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{invoicesBean.initializeCompanies}"/>
+            </f:metadata>
         </h:form>
 
         <p:dialog id="addDialog" header="#{msg['protected.invoices.create_title']}" widgetVar="addDialogWidget"
@@ -106,12 +110,14 @@
 
                             <f:selectItems value="#{invoicesBean.companies}" var="company"
                                            itemLabel="#{company.name}" itemValue="#{company}" />
+
+                            <f:ajax event="change" render="client" />
                         </p:selectOneMenu>
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.invoices.client']}">
                         <p:selectOneMenu value="#{invoicesBean.entity.client}"
-                                         converter="#{clientTypeConverter}"
+                                         converter="#{clientTypeConverter}" id="client"
                                          label="#{msg['protected.invoices.client']}">
 
                             <f:selectItems value="#{invoicesBean.clients}" var="client"

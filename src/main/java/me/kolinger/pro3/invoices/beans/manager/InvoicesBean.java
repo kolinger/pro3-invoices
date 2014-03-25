@@ -40,6 +40,7 @@ public class InvoicesBean extends CrudBean<Invoice> {
     private InvoicesService service;
     private Product product;
     private LazyDataModel<InvoiceExtended> extendedLazyDataModel;
+    private List<Company> companies;
 
     @Autowired
     public InvoicesBean(InvoicesService service, InvoicesExtendedService extendedService) {
@@ -52,12 +53,19 @@ public class InvoicesBean extends CrudBean<Invoice> {
         return extendedLazyDataModel;
     }
 
+    public void initializeCompanies() {
+        companies = companiesService.findAll("roleInvoices");
+    }
+
     public List<Company> getCompanies() {
-        return companiesService.findAll("roleInvoices");
+        return companies;
     }
 
     public List<Client> getClients() {
-        return clientsService.findAll();
+        if (getEntity().getCompany() == null && companies.size() > 0) {
+            return clientsService.findByCompany(companies.get(0));
+        }
+        return clientsService.findByCompany(getEntity().getCompany());
     }
 
     public String[][] getTypes() {
