@@ -29,7 +29,7 @@ public abstract class IdentifiedEntity extends LoggedObject implements Serializa
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !getClass().isAssignableFrom(o.getClass())) return false;
 
         IdentifiedEntity that = (IdentifiedEntity) o;
 
