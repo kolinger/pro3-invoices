@@ -28,8 +28,6 @@
                         <f:selectItem itemValue="" itemLabel="" />
                         <f:selectItems value="#{invoicesBean.companies}" var="company"
                                        itemLabel="#{company.name}" itemValue="#{company}" />
-
-                        <f:ajax event="change" render="client2" />
                     </p:selectOneMenu>
                 </p:outputLabel>
 
@@ -38,14 +36,7 @@
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.invoices.client']}">
-                    <p:selectOneMenu value="#{invoicesBean.filter.client}"
-                                     converter="#{clientTypeConverter}" id="client2"
-                                     label="#{msg['protected.invoices.client']}">
-
-                        <f:selectItem itemValue="" itemLabel="" />
-                        <f:selectItems value="#{invoicesBean.clients}" var="client"
-                                       itemLabel="#{client.name}" itemValue="#{client}" />
-                    </p:selectOneMenu>
+                    <p:inputText value="#{invoicesBean.filter.client}" label="#{msg['protected.invoices.client']}" />
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.invoices.type']}">

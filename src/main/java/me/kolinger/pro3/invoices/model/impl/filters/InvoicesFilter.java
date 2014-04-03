@@ -23,8 +23,8 @@ public class InvoicesFilter extends AbstractFilter {
     @Property(name = "id", expression = Expression.EQUAL)
     private Long id;
 
-    @Property(name = "client", expression = Expression.EQUAL)
-    private Client client;
+    @Property(name = "client.name", expression = Expression.LIKE)
+    private String client;
 
     @Property(name = "type", expression = Expression.EQUAL)
     private Invoice.Type type;
@@ -66,11 +66,11 @@ public class InvoicesFilter extends AbstractFilter {
         this.id = id;
     }
 
-    public Client getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(String client) {
         this.client = client;
     }
 
