@@ -26,12 +26,12 @@
                 </p:column>
 
                 <p:column sortBy="#{row.price}" headerText="#{msg['protected.products.price']}">
-                    <h:outputText value="#{row.price}" rendered="#{row.price != null}" />
+                    <h:outputText value="#{row.price} Kč" rendered="#{row.price != null}" />
                     <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.price eq null}" />
                 </p:column>
 
                 <p:column sortBy="#{row.tax}" headerText="#{msg['protected.products.tax']}">
-                    <h:outputText value="#{row.tax}" rendered="#{row.tax != null}" />
+                    <h:outputText value="#{row.tax}%" rendered="#{row.tax != null}" />
                     <h:outputText value="#{msg['protected.products.null']}" rendered="#{row.tax eq null}" />
                 </p:column>
 

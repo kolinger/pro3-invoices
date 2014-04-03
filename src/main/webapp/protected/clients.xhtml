@@ -29,6 +29,14 @@
                     <h:outputText value="#{row.street}, #{row.zip} #{row.city}" />
                 </p:column>
 
+                <p:column sortBy="#{row.companyIn}" headerText="#{msg['protected.clients.company_in']}">
+                    <h:outputText value="#{row.companyIn}" />
+                </p:column>
+
+                <p:column sortBy="#{row.vatId}" headerText="#{msg['protected.clients.vat_id']}">
+                    <h:outputText value="#{row.vatId}" />
+                </p:column>
+
                 <p:column headerText="#{msg['layout.crud.actions']}">
                     <p:commandButton oncomplete="editDialogWidget.show()" icon="ui-icon-pencil"
                                      value="#{msg['layout.crud.edit']}"

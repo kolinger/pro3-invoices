@@ -38,11 +38,22 @@
                 </p:column>
 
                 <p:column sortBy="#{row.amount}" headerText="#{msg['protected.invoices.amount']}">
-                    <h:outputText value="#{invoicesBean.round(row.amount)}" />
+                    <h:outputText value="#{invoicesBean.round(row.amount)} Kč" />
                 </p:column>
 
                 <p:column sortBy="#{row.payed}" headerText="#{msg['protected.invoices.payed']}">
-                    <h:outputText value="#{invoicesBean.round(row.payed)}" />
+                    <h:outputText value="#{invoicesBean.round(row.payed)} Kč" />
+                </p:column>
+
+                <p:column headerText="#{msg['protected.invoices.state']}">
+                    <h:outputText value="#{msg['protected.invoices.state.paid']}"
+                                  rendered="#{row.amount eq row.payed}" styleClass="label label-success" />
+
+                    <h:outputText value="#{msg['protected.invoices.state.overpaid']} (#{invoicesBean.round(row.payed - row.amount)} Kč)"
+                                  rendered="#{row.amount lt row.payed}" styleClass="label label-success" />
+
+                    <h:outputText value="#{msg['protected.invoices.state.unpaid']} (#{invoicesBean.round(row.amount - row.payed)} Kč)"
+                                  rendered="#{row.amount gt row.payed}" styleClass="label label-danger" />
                 </p:column>
 
                 <p:column sortBy="#{row.createDate}" headerText="#{msg['protected.invoices.create_date']}">
