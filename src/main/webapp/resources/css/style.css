@@ -75,6 +75,19 @@ table tr td {
     font-weight: bolder;
 }
 
+#filter {
+    margin-bottom: 10px;
+}
+
+#filter input,
+#filter .ui-selectonemenu {
+    margin: 0 20px 0 5px !important;
+}
+
+#filter .ui-selectonemenu {
+    margin-bottom: -10px !important;
+}
+
 /************************ invoice print ************************/
 
 .invoice {
