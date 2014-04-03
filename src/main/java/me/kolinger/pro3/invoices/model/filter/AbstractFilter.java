@@ -93,7 +93,7 @@ public abstract class AbstractFilter extends LoggedObject {
             Object value = getScalarValue(field);
             String name = "apply" + firstUpper(field.getName()) + "Criteria";
             Method method = getClass().getMethod(name, Criteria.class, String.class);
-            method.invoke(name, criteria, value);
+            method.invoke(this, criteria, value);
         }
         return criterion;
     }
