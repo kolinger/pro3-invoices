@@ -11,6 +11,46 @@
         <h:form id="buttons">
             <p:commandButton value="#{msg['protected.clients.create']}" action="#{clientsBean.createNew}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
+
+            <p:commandButton value="#{msg['layout.crud.filter']}" update=":filter :buttons"
+                             action="#{clientsBean.showFilter}" rendered="#{not clientsBean.filterState}" />
+        </h:form>
+
+        <h:form id="filter">
+            <p:messages id="messages" />
+
+            <p:panel rendered="#{clientsBean.filterState}">
+                <p:outputLabel value="#{msg['protected.clients.company']}">
+                    <p:selectOneMenu value="#{clientsBean.filter.company}"
+                                     converter="#{companyTypeConverter}"
+                                     label="#{msg['protected.clients.company']}">
+
+                        <f:selectItem itemValue="" itemLabel="" />
+                        <f:selectItems value="#{clientsBean.companies}" var="company"
+                                       itemLabel="#{company.name}" itemValue="#{company}" />
+                    </p:selectOneMenu>
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.clients.name']}">
+                    <p:inputText value="#{clientsBean.filter.name}" label="#{msg['protected.companies.name']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.clients.address']}">
+                    <p:inputText value="#{clientsBean.filter.address}" label="#{msg['protected.clients.address']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.clients.company_in']}">
+                    <p:inputText value="#{clientsBean.filter.companyIn}" label="#{msg['protected.companies.company_in']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.clients.vat_id']}">
+                    <p:inputText value="#{clientsBean.filter.vatId}" label="#{msg['protected.companies.vat_id']}" />
+                </p:outputLabel>
+
+                <p:commandButton value="#{msg['layout.crud.apply']}" update=":list messages" />
+                <p:commandButton value="#{msg['layout.crud.clean']}" update=":list :filter :buttons"
+                                 action="#{clientsBean.cleanFilter}" />
+            </p:panel>
         </h:form>
 
         <h:form id="list">

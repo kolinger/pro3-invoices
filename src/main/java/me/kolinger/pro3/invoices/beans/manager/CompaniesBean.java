@@ -1,8 +1,9 @@
 package me.kolinger.pro3.invoices.beans.manager;
 
-import me.kolinger.pro3.invoices.beans.CrudBean;
+import me.kolinger.pro3.invoices.beans.FilteredCrudBean;
 import me.kolinger.pro3.invoices.model.impl.entities.Company;
 import me.kolinger.pro3.invoices.model.impl.entities.Permission;
+import me.kolinger.pro3.invoices.model.impl.filters.CompaniesFilter;
 import me.kolinger.pro3.invoices.model.impl.services.CompaniesService;
 import me.kolinger.pro3.invoices.model.impl.services.PermissionsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Scope("session")
 @Component
-public class CompaniesBean extends CrudBean<Company> {
+public class CompaniesBean extends FilteredCrudBean<Company, CompaniesFilter> {
 
     @Autowired
     public PermissionsService permissionsService;
@@ -25,6 +26,7 @@ public class CompaniesBean extends CrudBean<Company> {
     public CompaniesBean(CompaniesService service) {
         super(service);
         this.service = service;
+        setFilter(new CompaniesFilter());
     }
 
     @Override

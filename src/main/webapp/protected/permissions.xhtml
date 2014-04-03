@@ -11,6 +11,35 @@
         <h:form id="buttons">
             <p:commandButton value="#{msg['protected.permissions.create']}" action="#{permissionsBean.createNew}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
+
+            <p:commandButton value="#{msg['layout.crud.filter']}" update=":filter :buttons"
+                             action="#{permissionsBean.showFilter}" rendered="#{not permissionsBean.filterState}" />
+        </h:form>
+
+        <h:form id="filter">
+            <p:messages id="messages" />
+
+            <p:panel rendered="#{permissionsBean.filterState}">
+                <p:outputLabel value="#{msg['protected.invoices.company']}">
+                    <p:selectOneMenu value="#{permissionsBean.filter.company}"
+                                     converter="#{companyTypeConverter}"
+                                     label="#{msg['protected.invoices.company']}">
+
+                        <f:selectItem itemValue="" itemLabel="" />
+                        <f:selectItems value="#{permissionsBean.companies}" var="company"
+                                       itemLabel="#{company.name}" itemValue="#{company}" />
+                    </p:selectOneMenu>
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.permissions.manager']}">
+                    <p:inputText value="#{permissionsBean.filter.manager}"
+                                 label="#{msg['protected.permissions.manager']}" />
+                </p:outputLabel>
+
+                <p:commandButton value="#{msg['layout.crud.apply']}" update=":list messages" />
+                <p:commandButton value="#{msg['layout.crud.clean']}" update=":list :filter :buttons"
+                                 action="#{permissionsBean.cleanFilter}" />
+            </p:panel>
         </h:form>
 
         <h:form id="list">

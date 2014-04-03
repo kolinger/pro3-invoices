@@ -1,6 +1,6 @@
 package me.kolinger.pro3.invoices.beans.manager;
 
-import me.kolinger.pro3.invoices.beans.CrudBean;
+import me.kolinger.pro3.invoices.beans.FilteredCrudBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import me.kolinger.pro3.invoices.model.LazyDataModel;
 import me.kolinger.pro3.invoices.model.impl.entities.Client;
@@ -9,6 +9,7 @@ import me.kolinger.pro3.invoices.model.impl.entities.Invoice;
 import me.kolinger.pro3.invoices.model.impl.entities.InvoiceExtended;
 import me.kolinger.pro3.invoices.model.impl.entities.InvoiceProduct;
 import me.kolinger.pro3.invoices.model.impl.entities.Product;
+import me.kolinger.pro3.invoices.model.impl.filters.InvoicesFilter;
 import me.kolinger.pro3.invoices.model.impl.services.ClientsService;
 import me.kolinger.pro3.invoices.model.impl.services.CompaniesService;
 import me.kolinger.pro3.invoices.model.impl.services.InvoicesExtendedService;
@@ -26,7 +27,7 @@ import java.util.List;
  */
 @Scope("session")
 @Component
-public class InvoicesBean extends CrudBean<Invoice> {
+public class InvoicesBean extends FilteredCrudBean<Invoice, InvoicesFilter> {
 
     @Autowired
     public ProductsService productsService;
@@ -47,6 +48,8 @@ public class InvoicesBean extends CrudBean<Invoice> {
         super(service);
         this.service = service;
         extendedLazyDataModel = new LazyDataModel<InvoiceExtended>(extendedService);
+        setFilter(new InvoicesFilter());
+        extendedLazyDataModel.setFilter(getFilter());
     }
 
     public LazyDataModel<InvoiceExtended> getExtendedLazyDataModel() {
@@ -62,7 +65,7 @@ public class InvoicesBean extends CrudBean<Invoice> {
     }
 
     public List<Client> getClients() {
-        if (getEntity().getCompany() == null && companies.size() > 0) {
+        if ((getEntity() == null || getEntity().getCompany() == null) && companies.size() > 0) {
             return clientsService.findByCompany(companies.get(0));
         }
         return clientsService.findByCompany(getEntity().getCompany());
@@ -75,6 +78,16 @@ public class InvoicesBean extends CrudBean<Invoice> {
 
                 new String[]{Invoice.Type.CREDIT_NOTE.toString(),
                         Translator.translate("protected.invoices.type.credit_note")},
+        };
+    }
+
+    public String[][] getStates() {
+        return new String[][]{
+                new String[]{InvoicesFilter.State.PAID.toString(),
+                        Translator.translate("protected.invoices.state.paid")},
+
+                new String[]{InvoicesFilter.State.UNPAID.toString(),
+                        Translator.translate("protected.invoices.state.unpaid")},
         };
     }
 

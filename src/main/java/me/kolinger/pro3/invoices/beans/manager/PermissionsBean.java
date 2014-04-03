@@ -1,10 +1,11 @@
 package me.kolinger.pro3.invoices.beans.manager;
 
-import me.kolinger.pro3.invoices.beans.CrudBean;
+import me.kolinger.pro3.invoices.beans.FilteredCrudBean;
 import me.kolinger.pro3.invoices.common.Translator;
 import me.kolinger.pro3.invoices.model.impl.entities.Company;
 import me.kolinger.pro3.invoices.model.impl.entities.Manager;
 import me.kolinger.pro3.invoices.model.impl.entities.Permission;
+import me.kolinger.pro3.invoices.model.impl.filters.PermissionsFilter;
 import me.kolinger.pro3.invoices.model.impl.services.CompaniesService;
 import me.kolinger.pro3.invoices.model.impl.services.ManagersService;
 import me.kolinger.pro3.invoices.model.impl.services.PermissionsService;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Scope("session")
 @Component
-public class PermissionsBean extends CrudBean<Permission> {
+public class PermissionsBean extends FilteredCrudBean<Permission, PermissionsFilter> {
 
     @Autowired
     public CompaniesService companiesService;
@@ -29,13 +30,12 @@ public class PermissionsBean extends CrudBean<Permission> {
     @Autowired
     public ManagersService managersService;
 
-    private PermissionsService service;
     private String managerUsername;
 
     @Autowired
     public PermissionsBean(PermissionsService service) {
         super(service);
-        this.service = service;
+        setFilter(new PermissionsFilter());
     }
 
     public String getManagerUsername() {

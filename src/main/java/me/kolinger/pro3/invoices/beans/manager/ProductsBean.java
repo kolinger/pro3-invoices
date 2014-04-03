@@ -1,8 +1,9 @@
 package me.kolinger.pro3.invoices.beans.manager;
 
-import me.kolinger.pro3.invoices.beans.CrudBean;
+import me.kolinger.pro3.invoices.beans.FilteredCrudBean;
 import me.kolinger.pro3.invoices.model.impl.entities.Company;
 import me.kolinger.pro3.invoices.model.impl.entities.Product;
+import me.kolinger.pro3.invoices.model.impl.filters.ProductsFilter;
 import me.kolinger.pro3.invoices.model.impl.services.CompaniesService;
 import me.kolinger.pro3.invoices.model.impl.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Scope("session")
 @Component
-public class ProductsBean extends CrudBean<Product> {
+public class ProductsBean extends FilteredCrudBean<Product, ProductsFilter> {
 
     @Autowired
     public CompaniesService companiesService;
@@ -24,6 +25,7 @@ public class ProductsBean extends CrudBean<Product> {
     @Autowired
     public ProductsBean(ProductsService service) {
         super(service);
+        setFilter(new ProductsFilter());
     }
 
     public List<Company> getCompanies() {

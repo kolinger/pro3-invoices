@@ -11,6 +11,99 @@
         <h:form id="buttons">
             <p:commandButton value="#{msg['protected.invoices.create']}" action="#{invoicesBean.createNew}"
                              update=":addDialog" oncomplete="addDialogWidget.show();resizeDialog(addDialogWidget);" />
+
+            <p:commandButton value="#{msg['layout.crud.filter']}" update=":filter :buttons"
+                             action="#{invoicesBean.showFilter}" rendered="#{not invoicesBean.filterState}" />
+        </h:form>
+
+        <h:form id="filter">
+            <p:messages id="messages" />
+
+            <p:panel rendered="#{invoicesBean.filterState}">
+                <p:outputLabel value="#{msg['protected.invoices.company']}">
+                    <p:selectOneMenu value="#{invoicesBean.filter.company}"
+                                     converter="#{companyTypeConverter}"
+                                     label="#{msg['protected.invoices.company']}">
+
+                        <f:selectItem itemValue="" itemLabel="" />
+                        <f:selectItems value="#{invoicesBean.companies}" var="company"
+                                       itemLabel="#{company.name}" itemValue="#{company}" />
+
+                        <f:ajax event="change" render="client2" />
+                    </p:selectOneMenu>
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.id']}">
+                    <p:inputText value="#{invoicesBean.filter.id}" label="#{msg['protected.invoices.id']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.client']}">
+                    <p:selectOneMenu value="#{invoicesBean.filter.client}"
+                                     converter="#{clientTypeConverter}" id="client2"
+                                     label="#{msg['protected.invoices.client']}">
+
+                        <f:selectItem itemValue="" itemLabel="" />
+                        <f:selectItems value="#{invoicesBean.clients}" var="client"
+                                       itemLabel="#{client.name}" itemValue="#{client}" />
+                    </p:selectOneMenu>
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.type']}">
+                    <p:selectOneMenu value="#{invoicesBean.filter.type}"
+                                     label="#{msg['protected.invoices.type']}">
+
+                        <f:selectItem itemValue="" itemLabel="" />
+                        <f:selectItems value="#{invoicesBean.types}" var="type"
+                                       itemLabel="#{type[1]}" itemValue="#{type[0]}" />
+                    </p:selectOneMenu>
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.amount']}">
+                    <p:inputText value="#{invoicesBean.filter.amount}" label="#{msg['protected.invoices.amount']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.payed']}">
+                    <p:inputText value="#{invoicesBean.filter.paid}" label="#{msg['protected.invoices.payed']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.state']}">
+                    <p:selectOneMenu value="#{invoicesBean.filter.state}"
+                                     label="#{msg['protected.invoices.state']}">
+
+                        <f:selectItem itemValue="" itemLabel="" />
+                        <f:selectItems value="#{invoicesBean.states}" var="state"
+                                       itemLabel="#{state[1]}" itemValue="#{state[0]}" />
+                    </p:selectOneMenu>
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.create_date_from']}">
+                    <p:calendar value="#{invoicesBean.filter.createDateFrom}"
+                                label="#{msg['protected.invoices.create_date_from']}"
+                                pattern="#{invoicesBean.dateFormat}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.create_date_to']}">
+                    <p:calendar value="#{invoicesBean.filter.createDateTo}"
+                                label="#{msg['protected.invoices.create_date_to']}"
+                                pattern="#{invoicesBean.dateFormat}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.end_date_from']}">
+                    <p:calendar value="#{invoicesBean.filter.endDateFrom}"
+                                label="#{msg['protected.invoices.end_date_from']}"
+                                pattern="#{invoicesBean.dateFormat}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.invoices.end_date_to']}">
+                    <p:calendar value="#{invoicesBean.filter.endDateTo}"
+                                label="#{msg['protected.invoices.end_date_to']}"
+                                pattern="#{invoicesBean.dateFormat}" />
+                </p:outputLabel>
+
+                <p:commandButton value="#{msg['layout.crud.apply']}" update=":list messages" />
+                <p:commandButton value="#{msg['layout.crud.clean']}" update=":list :filter :buttons"
+                                 action="#{invoicesBean.cleanFilter}" />
+            </p:panel>
         </h:form>
 
         <h:form id="list">

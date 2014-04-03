@@ -12,6 +12,55 @@
         <h:form id="buttons">
             <p:commandButton value="#{msg['protected.payments.create']}" action="#{paymentsBean.createNew}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
+
+            <p:commandButton value="#{msg['layout.crud.filter']}" update=":filter :buttons"
+                             action="#{paymentsBean.showFilter}" rendered="#{not paymentsBean.filterState}" />
+        </h:form>
+
+        <h:form id="filter">
+            <p:messages id="messages" />
+
+            <p:panel rendered="#{paymentsBean.filterState}">
+                <p:outputLabel value="#{msg['protected.payments.company']}">
+                    <p:selectOneMenu value="#{paymentsBean.filter.company}"
+                                     converter="#{companyTypeConverter}"
+                                     label="#{msg['protected.payments.company']}">
+
+                        <f:selectItem itemValue="" itemLabel="" />
+                        <f:selectItems value="#{paymentsBean.companies}" var="company"
+                                       itemLabel="#{company.name}" itemValue="#{company}" />
+                    </p:selectOneMenu>
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.payments.id']}">
+                    <p:inputText value="#{paymentsBean.filter.variableSymbol}" label="#{msg['protected.payments.id']}" />
+                </p:outputLabel>
+
+
+                <p:outputLabel value="#{msg['protected.payments.client']}">
+                    <p:inputText value="#{paymentsBean.filter.client}" label="#{msg['protected.payments.client']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.payments.amount']}">
+                    <p:inputText value="#{paymentsBean.filter.amount}" label="#{msg['protected.payments.amount']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.payments.date_from']}">
+                    <p:calendar value="#{paymentsBean.filter.dateFrom}"
+                                label="#{msg['protected.payments.date_from']}"
+                                pattern="#{invoicesBean.dateFormat}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.payments.date_to']}">
+                    <p:calendar value="#{paymentsBean.filter.dateTo}"
+                                label="#{msg['protected.payments.date_to']}"
+                                pattern="#{invoicesBean.dateFormat}" />
+                </p:outputLabel>
+
+                <p:commandButton value="#{msg['layout.crud.apply']}" update=":list messages" />
+                <p:commandButton value="#{msg['layout.crud.clean']}" update=":list :filter :buttons"
+                                 action="#{paymentsBean.cleanFilter}" />
+            </p:panel>
         </h:form>
     
         <h:form id="list">

@@ -11,6 +11,35 @@
         <h:form id="buttons">
             <p:commandButton value="#{msg['protected.companies.create']}" action="#{companiesBean.createNew}"
                              update=":addDialog" oncomplete="addDialogWidget.show()" />
+
+            <p:commandButton value="#{msg['layout.crud.filter']}" update=":filter :buttons"
+                             action="#{companiesBean.showFilter}" rendered="#{not companiesBean.filterState}" />
+        </h:form>
+
+        <h:form id="filter">
+            <p:messages id="messages" />
+
+            <p:panel rendered="#{companiesBean.filterState}">
+                <p:outputLabel value="#{msg['protected.companies.name']}">
+                    <p:inputText value="#{companiesBean.filter.name}" label="#{msg['protected.companies.name']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.clients.address']}">
+                    <p:inputText value="#{companiesBean.filter.address}" label="#{msg['protected.clients.address']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.companies.company_in']}">
+                    <p:inputText value="#{companiesBean.filter.companyIn}" label="#{msg['protected.companies.company_in']}" />
+                </p:outputLabel>
+
+                <p:outputLabel value="#{msg['protected.companies.vat_id']}">
+                    <p:inputText value="#{companiesBean.filter.vatId}" label="#{msg['protected.companies.vat_id']}" />
+                </p:outputLabel>
+
+                <p:commandButton value="#{msg['layout.crud.apply']}" update=":list messages" />
+                <p:commandButton value="#{msg['layout.crud.clean']}" update=":list :filter :buttons"
+                                 action="#{companiesBean.cleanFilter}" />
+            </p:panel>
         </h:form>
 
         <h:form id="list">
