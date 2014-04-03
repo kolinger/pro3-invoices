@@ -88,6 +88,14 @@ table tr td {
     margin-bottom: -10px !important;
 }
 
+#filter button {
+    margin-right: 10px;
+}
+
+#buttons button {
+    margin-right: 10px;
+}
+
 /************************ invoice print ************************/
 
 .invoice {
