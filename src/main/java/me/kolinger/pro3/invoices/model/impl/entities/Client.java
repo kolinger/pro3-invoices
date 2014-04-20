@@ -1,6 +1,7 @@
 package me.kolinger.pro3.invoices.model.impl.entities;
 
 import me.kolinger.pro3.invoices.model.DeletableEntity;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,9 @@ public class Client extends DeletableEntity {
 
     @Column(nullable = false, length = 5)
     private String zip;
+
+    @Formula(value="street || ' ' || city || ' ' || zip")
+    private String address;
 
     @Column(length = 8)
     private String companyIn;
@@ -83,6 +87,14 @@ public class Client extends DeletableEntity {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCompanyIn() {

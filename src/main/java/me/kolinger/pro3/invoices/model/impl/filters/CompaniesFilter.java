@@ -62,10 +62,6 @@ public class CompaniesFilter extends AbstractFilter {
 
         String realValue = '%' + value.toString() + '%';
 
-        criteria.add(Restrictions.or(
-                Restrictions.like("street", realValue),
-                Restrictions.like("city", realValue),
-                Restrictions.like("zip", realValue)
-        ));
+        criteria.add(Restrictions.or(Restrictions.like("address", realValue)));
     }
 }
