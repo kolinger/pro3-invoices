@@ -98,10 +98,10 @@
         </h:form>
 
         <h:form id="list">
-            <p:dataTable var="row" value="#{invoicesBean.extendedLazyDataModel}" sortMode="multiple" paginator="true"
+            <p:dataTable var="row" value="#{invoicesBean.extendedLazyDataModel}" sortMode="single" paginator="true"
                          paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
 
-                <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.invoices.company']}">
+                <p:column headerText="#{msg['protected.invoices.company']}">
                     <h:outputText value="#{row.company.name}" />
                 </p:column>
 
@@ -109,11 +109,11 @@
                     <h:outputText value="#{row.id}" />
                 </p:column>
 
-                <p:column sortBy="#{row.client.name}" headerText="#{msg['protected.invoices.client']}">
+                <p:column headerText="#{msg['protected.invoices.client']}">
                     <h:outputText value="#{row.client.name}" />
                 </p:column>
 
-                <p:column sortBy="#{row.type}" headerText="#{msg['protected.invoices.type']}">
+                <p:column headerText="#{msg['protected.invoices.type']}">
                     <h:outputText value="#{msg['protected.invoices.type.invoice']}"
                                   rendered="#{row.type.ordinal() == 0}" />
 
@@ -254,11 +254,11 @@
 
                         <p:commandButton value="#{msg['protected.invoices.product.add']}" update=":addForm"
                                          action="#{invoicesBean.addProduct}">
-                            <f:ajax render=":addForm" />
+                            <f:ajax render="products" />
                         </p:commandButton>
                     </p:row>
 
-                    <ui:repeat value="#{invoicesBean.entity.products}" var="value">
+                    <ui:repeat value="#{invoicesBean.entity.products}" var="value" id="products">
                         <h:outputText value="#{value.product.name}" styleClass="text2" />
 
                         <p:outputLabel value="#{msg['protected.invoices.product.count']}" styleClass="short">
@@ -283,7 +283,7 @@
 
                         <p:commandButton value="#{msg['protected.invoices.product.remove']}" update=":addForm"
                                          action="#{invoicesBean.removeProduct(value)}">
-                            <f:ajax render=":addForm" />
+                            <f:ajax render="products" />
                         </p:commandButton>
 
                         <br />
