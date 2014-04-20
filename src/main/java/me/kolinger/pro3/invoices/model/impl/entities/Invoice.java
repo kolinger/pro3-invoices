@@ -2,6 +2,7 @@ package me.kolinger.pro3.invoices.model.impl.entities;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Index;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +33,6 @@ public class Invoice implements Serializable {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "invoice", fetch = FetchType.LAZY)
-    @Fetch(FetchMode.SUBSELECT)
     private List<InvoiceProduct> products = new ArrayList<InvoiceProduct>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
@@ -57,6 +57,7 @@ public class Invoice implements Serializable {
     private String comment;
 
     @Column(nullable = false)
+    @Index(name = "invoice_deleted_idx")
     private Boolean deleted = false;
 
     public Long getId() {

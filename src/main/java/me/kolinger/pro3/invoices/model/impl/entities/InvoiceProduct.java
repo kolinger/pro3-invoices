@@ -1,6 +1,7 @@
 package me.kolinger.pro3.invoices.model.impl.entities;
 
 import me.kolinger.pro3.invoices.model.IdentifiedEntity;
+import org.hibernate.annotations.Index;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 public class InvoiceProduct extends IdentifiedEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @Index(name = "product_invoice_idx")
     private Invoice invoice;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)

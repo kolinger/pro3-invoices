@@ -7,6 +7,7 @@
     </appender>
 
     <logger name="me.kolinger.pro3.invoices" level="DEBUG" />
+    <!--<logger name="org.hibernate.type" level="TRACE" />&lt;!&ndash; show hibernate parameters for queries&ndash;&gt;-->
 
     <root level="WARN">
         <appender-ref ref="CONSOLE" />

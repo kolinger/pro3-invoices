@@ -2,10 +2,15 @@ package me.kolinger.pro3.invoices.model.impl.dao;
 
 import me.kolinger.pro3.invoices.common.Helper;
 import me.kolinger.pro3.invoices.model.AbstractDao;
+import me.kolinger.pro3.invoices.model.filter.AbstractFilter;
 import me.kolinger.pro3.invoices.model.impl.entities.InvoiceExtended;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**

@@ -28,8 +28,7 @@ public class InvoiceExtended implements Serializable {
     @Id
     private Long id;
 
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
     private List<InvoiceProduct> products;
 
     @OneToMany(mappedBy = "invoice")
