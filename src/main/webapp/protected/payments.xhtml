@@ -67,7 +67,7 @@
             <p:dataTable var="row" value="#{paymentsBean.lazyDataModel}" sortMode="multiple" paginator="true"
                          paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
 
-                <p:column sortBy="#{row.invoice.company.name}" headerText="#{msg['protected.payments.company']}">
+                <p:column headerText="#{msg['protected.payments.company']}">
                     <h:outputText value="#{row.invoice.company.name}" />
                 </p:column>
     
@@ -75,7 +75,7 @@
                     <h:outputText value="#{row.invoice.id}" />
                 </p:column>
     
-                <p:column sortBy="#{row.invoice.client.name}" headerText="#{msg['protected.payments.client']}">
+                <p:column headerText="#{msg['protected.payments.client']}">
                     <h:outputText value="#{row.invoice.client.name}" />
                 </p:column>
     

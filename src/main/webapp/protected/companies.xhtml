@@ -46,19 +46,19 @@
             <p:dataTable var="row" value="#{companiesBean.lazyDataModel}" sortMode="multiple" paginator="true"
                          paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
 
-                <p:column sortBy="#{row.name}" headerText="#{msg['protected.companies.name']}">
+                <p:column headerText="#{msg['protected.companies.name']}">
                     <h:outputText value="#{row.name}" />
                 </p:column>
 
-                <p:column sortBy="#{row.street}" headerText="#{msg['protected.clients.address']}">
+                <p:column headerText="#{msg['protected.clients.address']}">
                     <h:outputText value="#{row.street}, #{row.zip} #{row.city}" />
                 </p:column>
 
-                <p:column sortBy="#{row.companyIn}" headerText="#{msg['protected.companies.company_in']}">
+                <p:column headerText="#{msg['protected.companies.company_in']}">
                     <h:outputText value="#{row.companyIn}" />
                 </p:column>
 
-                <p:column sortBy="#{row.vatId}" headerText="#{msg['protected.companies.vat_id']}">
+                <p:column headerText="#{msg['protected.companies.vat_id']}">
                     <h:outputText value="#{row.vatId}" />
                 </p:column>
 

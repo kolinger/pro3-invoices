@@ -53,11 +53,11 @@
             <p:dataTable var="row" value="#{productsBean.lazyDataModel}" sortMode="multiple" paginator="true"
                          paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
 
-                <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.products.company']}">
+                <p:column headerText="#{msg['protected.products.company']}">
                     <h:outputText value="#{row.company.name}" />
                 </p:column>
 
-                <p:column sortBy="#{row.name}" headerText="#{msg['protected.products.name']}">
+                <p:column headerText="#{msg['protected.products.name']}">
                     <h:outputText value="#{row.name}" />
                 </p:column>
 

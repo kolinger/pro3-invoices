@@ -46,11 +46,11 @@
             <p:dataTable var="row" value="#{permissionsBean.lazyDataModel}" sortMode="multiple" paginator="true"
                          paginatorPosition="bottom" lazy="true" rows="10" emptyMessage="#{msg['layout.crud.no_records']}">
 
-                <p:column sortBy="#{row.company.name}" headerText="#{msg['protected.permissions.company']}">
+                <p:column headerText="#{msg['protected.permissions.company']}">
                     <h:outputText value="#{row.company.name}" />
                 </p:column>
 
-                <p:column sortBy="#{row.manager.username}" headerText="#{msg['protected.permissions.manager']}">
+                <p:column headerText="#{msg['protected.permissions.manager']}">
                     <h:outputText value="#{row.manager.username}" />
                 </p:column>
 
