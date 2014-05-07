@@ -22,14 +22,14 @@
 
             <p:panel rendered="#{paymentsBean.filterState}">
                 <p:outputLabel value="#{msg['protected.payments.company']}">
-                    <p:selectOneMenu value="#{paymentsBean.filter.company}"
+                    <h:selectOneMenu value="#{paymentsBean.filter.company}" styleClass="form-control"
                                      converter="#{companyTypeConverter}"
                                      label="#{msg['protected.payments.company']}">
 
                         <f:selectItem itemValue="" itemLabel="" />
                         <f:selectItems value="#{paymentsBean.companies}" var="company"
                                        itemLabel="#{company.name}" itemValue="#{company}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.payments.id']}">

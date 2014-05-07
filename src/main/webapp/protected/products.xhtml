@@ -21,14 +21,14 @@
 
             <p:panel rendered="#{productsBean.filterState}">
                 <p:outputLabel value="#{msg['protected.products.company']}">
-                    <p:selectOneMenu value="#{productsBean.filter.company}"
+                    <h:selectOneMenu value="#{productsBean.filter.company}" styleClass="form-control"
                                      converter="#{companyTypeConverter}"
                                      label="#{msg['protected.products.company']}">
 
                         <f:selectItem itemValue="" itemLabel="" />
                         <f:selectItems value="#{productsBean.companies}" var="company"
                                        itemLabel="#{company.name}" itemValue="#{company}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.products.name']}">
@@ -91,13 +91,13 @@
 
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.products.company']}">
-                        <p:selectOneMenu value="#{productsBean.entity.company}"
+                        <h:selectOneMenu value="#{productsBean.entity.company}" styleClass="form-control"
                                          converter="#{companyTypeConverter}"
                                          label="#{msg['protected.products.company']}">
 
                             <f:selectItems value="#{productsBean.companies}" var="company"
                                            itemLabel="#{company.name}" itemValue="#{company}" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.products.name']}">

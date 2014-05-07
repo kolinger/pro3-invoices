@@ -80,7 +80,8 @@ table tr td {
 }
 
 #filter input,
-#filter .ui-selectonemenu {
+#filter .ui-selectonemenu,
+#filter .form-control {
     margin: 0 20px 0 5px !important;
 }
 
@@ -169,4 +170,9 @@ table tr td {
 
 .btn-group {
     margin-right: 5px;
+}
+
+#filter .form-control {
+    display: inline !important;
+    width: auto !important;
 }

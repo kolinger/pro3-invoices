@@ -21,14 +21,14 @@
 
             <p:panel rendered="#{invoicesBean.filterState}">
                 <p:outputLabel value="#{msg['protected.invoices.company']}">
-                    <p:selectOneMenu value="#{invoicesBean.filter.company}"
+                    <h:selectOneMenu value="#{invoicesBean.filter.company}" styleClass="form-control"
                                      converter="#{companyTypeConverter}"
                                      label="#{msg['protected.invoices.company']}">
 
                         <f:selectItem itemValue="" itemLabel="" />
                         <f:selectItems value="#{invoicesBean.companies}" var="company"
                                        itemLabel="#{company.name}" itemValue="#{company}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.invoices.id']}">
@@ -40,13 +40,13 @@
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.invoices.type']}">
-                    <p:selectOneMenu value="#{invoicesBean.filter.type}"
+                    <h:selectOneMenu value="#{invoicesBean.filter.type}" styleClass="form-control"
                                      label="#{msg['protected.invoices.type']}">
 
                         <f:selectItem itemValue="" itemLabel="" />
                         <f:selectItems value="#{invoicesBean.types}" var="type"
                                        itemLabel="#{type[1]}" itemValue="#{type[0]}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.invoices.amount']}">
@@ -58,13 +58,13 @@
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.invoices.state']}">
-                    <p:selectOneMenu value="#{invoicesBean.filter.state}"
+                    <h:selectOneMenu value="#{invoicesBean.filter.state}" styleClass="form-control"
                                      label="#{msg['protected.invoices.state']}">
 
                         <f:selectItem itemValue="" itemLabel="" />
                         <f:selectItems value="#{invoicesBean.states}" var="state"
                                        itemLabel="#{state[1]}" itemValue="#{state[0]}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
                 </p:outputLabel>
 
                 <p:outputLabel value="#{msg['protected.invoices.create_date_from']}">
@@ -199,7 +199,7 @@
 
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.invoices.company']}">
-                        <p:selectOneMenu value="#{invoicesBean.entity.company}"
+                        <h:selectOneMenu value="#{invoicesBean.entity.company}" styleClass="form-control"
                                          converter="#{companyTypeConverter}"
                                          label="#{msg['protected.invoices.company']}">
 
@@ -207,26 +207,26 @@
                                            itemLabel="#{company.name}" itemValue="#{company}" />
 
                             <f:ajax event="change" render="client" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.invoices.client']}">
-                        <p:selectOneMenu value="#{invoicesBean.entity.client}"
+                        <h:selectOneMenu value="#{invoicesBean.entity.client}" styleClass="form-control"
                                          converter="#{clientTypeConverter}" id="client"
                                          label="#{msg['protected.invoices.client']}">
 
                             <f:selectItems value="#{invoicesBean.clients}" var="client"
                                            itemLabel="#{client.name}" itemValue="#{client}" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.invoices.type']}">
-                        <p:selectOneMenu value="#{invoicesBean.entity.type}"
+                        <h:selectOneMenu value="#{invoicesBean.entity.type}" styleClass="form-control"
                                          label="#{msg['protected.invoices.type']}">
 
                             <f:selectItems value="#{invoicesBean.types}" var="type"
                                            itemLabel="#{type[1]}" itemValue="#{type[0]}" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.invoices.create_date']}">
@@ -247,10 +247,10 @@
                     </p:outputLabel>
 
                     <p:row>
-                        <p:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
-                            <f:selectItems value="#{invoicesBean.products}" var="product"
+                        <h:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
+                            <f:selectItems value="#{invoicesBean.products}" var="product" styleClass="form-control"
                                            itemLabel="#{product.name}" itemValue="#{product}" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
 
                         <p:commandButton value="#{msg['protected.invoices.product.add']}" update=":addForm"
                                          action="#{invoicesBean.addProduct}">
@@ -309,22 +309,22 @@
 
                 <p:panelGrid columns="1">
                     <p:outputLabel value="#{msg['protected.invoices.client']}">
-                        <p:selectOneMenu value="#{invoicesBean.entity.client}"
+                        <h:selectOneMenu value="#{invoicesBean.entity.client}" styleClass="form-control"
                                          converter="#{clientTypeConverter}"
                                          label="#{msg['protected.invoices.client']}">
 
                             <f:selectItems value="#{invoicesBean.clients}" var="client"
                                            itemLabel="#{client.name}" itemValue="#{client}" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.invoices.type']}">
-                        <p:selectOneMenu value="#{invoicesBean.entity.type}"
+                        <h:selectOneMenu value="#{invoicesBean.entity.type}" styleClass="form-control"
                                          label="#{msg['protected.invoices.type']}">
 
                             <f:selectItems value="#{invoicesBean.types}" var="type"
                                            itemLabel="#{type[1]}" itemValue="#{type[0]}" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
                     </p:outputLabel>
 
                     <p:outputLabel value="#{msg['protected.invoices.create_date']}">
@@ -345,10 +345,10 @@
                     </p:outputLabel>
 
                     <p:row>
-                        <p:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
-                            <f:selectItems value="#{invoicesBean.products}" var="product"
+                        <h:selectOneMenu value="#{invoicesBean.product}" converter="#{productTypeConverter}">
+                            <f:selectItems value="#{invoicesBean.products}" var="product" styleClass="form-control"
                                            itemLabel="#{product.name}" itemValue="#{product}" />
-                        </p:selectOneMenu>
+                        </h:selectOneMenu>
 
                         <p:commandButton value="#{msg['protected.invoices.product.add']}" update=":editForm"
                                          action="#{invoicesBean.addProduct}">
