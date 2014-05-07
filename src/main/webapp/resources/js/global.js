@@ -44,3 +44,30 @@ function resizeDialog(dialog) {
         pos.top = offsetY;
     el.offset(pos);
 }
+
+$(function () {
+    $(document).mousemove(function(e) {
+        window.x = e.pageX;
+        window.y = e.pageY;
+
+        var spinner = $('#spinner');
+        if (spinner.is(':visible')) {
+            spinner.css({
+                left: x + 20,
+                top: y + 40
+            });
+        }
+    });
+});
+
+function showAjaxSpinner() {
+    $('#spinner').show().css({
+        position: 'absolute',
+        left: x + 20,
+        top: y + 40
+    });
+}
+
+function hideAjaxSpinner() {
+    $('#spinner').hide();
+}

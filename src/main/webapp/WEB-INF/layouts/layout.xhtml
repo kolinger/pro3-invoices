@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <meta charset="utf-8" />
@@ -22,6 +23,9 @@
     <ui:insert name="head"></ui:insert>
 </h:head>
 <h:body>
+    <div id="spinner"></div>
+    <p:ajaxStatus onstart="showAjaxSpinner();" onsuccess="hideAjaxSpinner();"/>
+
     <div class="container-fluid">
         <div class="clearfix">
             <div class="pull-left">

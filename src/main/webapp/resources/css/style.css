@@ -1,33 +1,33 @@
 .user-panel {
-	margin: 35px 10px 0 0;
+    margin: 35px 10px 0 0;
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td,
 .table > tbody > tr > td, .table > tfoot > tr > td {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .company-select {
-	line-height: 45px;
+    line-height: 45px;
 }
 
 .products-controls .form-control {
-	width: 200px;
-	display: inline-block;
-	margin-right: 10px;
+    width: 200px;
+    display: inline-block;
+    margin-right: 10px;
 }
 
 .products .form-control {
-	width: 200px;
-	display: inline-block;
+    width: 200px;
+    display: inline-block;
 }
 
 .products .small {
-	width: 100px;
+    width: 100px;
 }
 
 .products .btn {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 #buttons {
@@ -69,6 +69,7 @@ table tr td {
 .b-form label.short input {
     width: 100px !important;
 }
+
 .b-form .text2 {
     float: none;
     padding-right: 10px;
@@ -100,68 +101,68 @@ table tr td {
 /************************ invoice print ************************/
 
 .invoice {
-	width: 740px;
-	margin: 10px;
-	font-family: sans-serif;
+    width: 740px;
+    margin: 10px;
+    font-family: sans-serif;
 }
 
 .invoice table,
 .invoice tbody,
 .invoice thead,
 .invoice tfoot {
-	text-align: left;
-	border-spacing: 0;
-	margin: 0;
-	padding: 0;
+    text-align: left;
+    border-spacing: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .invoice th {
-	width: 140px;
-	white-space: nowrap;
+    width: 140px;
+    white-space: nowrap;
 }
 
 .invoice th,
 .invoice td {
-	padding: 5px;
+    padding: 5px;
 }
 
 .invoice .left {
-	width: 350px;
-	float: left;
+    width: 350px;
+    float: left;
 }
 
 .invoice .left table {
-	width: 350px;
-	float: left;
-	padding-left: 10px;
+    width: 350px;
+    float: left;
+    padding-left: 10px;
 }
 
 .invoice .products {
-	width: 702px;
+    width: 702px;
 }
 
 .invoice .products tfoot tr:first-of-type td {
-	border-top: 1px solid #000;
-	padding-top: 15px;
+    border-top: 1px solid #000;
+    padding-top: 15px;
 }
 
 .invoice .products tr td:first-of-type,
 .invoice .products tr th:first-of-type {
-	padding-left: 10px;
+    padding-left: 10px;
 }
 
 .invoice .products tr td:last-of-type,
 .invoice .products tr th:last-of-type {
-	padding-right: 10px;
+    padding-right: 10px;
 }
 
 .invoice .padding-bottom {
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .invoice .head {
-	border-bottom: 1px solid #000;
-	float: left;
+    border-bottom: 1px solid #000;
+    float: left;
 }
 
 .ui-datatable-data td {
@@ -175,4 +176,16 @@ table tr td {
 #filter .form-control {
     display: inline !important;
     width: auto !important;
+}
+
+#spinner {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -15px 0 0 -15px;
+    background: url(#{resource['img/ajax-loader.gif']}) no-repeat 50% 50%;
+    padding: 13px;
+    font-size: 0;
+    display: none;
+    z-index: 10000;
 }
