@@ -67,4 +67,14 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
+
+    <!-- combined resources -->
+    <!--<servlet>-->
+        <!--<servlet-name>CombinedResourcesServlet</servlet-name>-->
+        <!--<servlet-class>me.kolinger.pro3.invoices.resources.CombinedResourcesServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>CombinedResourcesServlet</servlet-name>-->
+        <!--<url-pattern>/_static/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 </web-app>

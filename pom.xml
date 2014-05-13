@@ -73,6 +73,11 @@
             <artifactId>jsf-impl</artifactId>
             <version>2.1.0-b03</version>
         </dependency>
+        <dependency>
+            <groupId>com.yahoo.platform.yui</groupId>
+            <artifactId>yuicompressor</artifactId>
+            <version>2.3.6</version>
+        </dependency>
 
         <!-- primefaces -->
         <dependency>

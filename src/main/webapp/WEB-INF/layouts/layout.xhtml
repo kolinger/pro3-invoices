@@ -13,12 +13,10 @@
     <meta name="description" content="#{msg['layout.description']}" />
     <meta name="author" content="Tomáš Kolinger" />
 
-    <h:outputStylesheet library="css" name="reset.css" />
-    <h:outputStylesheet library="css" name="bootstrap.css" />
-    <h:outputStylesheet library="css" name="bootstrap-theme.css" />
-    <h:outputStylesheet library="css" name="style.css" />
-
-    <h:outputScript library="js" name="modernizr-2.7.0.dev.js" />
+    <h:outputStylesheet library="css" name="reset.css" target="head" />
+    <h:outputStylesheet library="css" name="bootstrap.css" target="head" />
+    <h:outputStylesheet library="css" name="bootstrap-theme.css" target="head" />
+    <h:outputStylesheet library="css" name="style.css" target="head" />
 
     <ui:insert name="head"></ui:insert>
 </h:head>
@@ -47,8 +45,8 @@
         to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google
         Chrome Frame</a> to experience this site.</p><![endif]-->
 
-    <h:outputScript library="js" name="bootstrap.min.js" />
-    <h:outputScript library="js" name="global.js" />
+    <h:outputScript library="js" name="bootstrap.min.js" target="body" />
+    <h:outputScript library="js" name="global.js" target="body" />
     <ui:insert name="js"></ui:insert>
 </h:body>
 </html>

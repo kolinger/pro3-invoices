@@ -18,6 +18,13 @@
         </resource-bundle>
 
         <message-bundle>javax.faces.Messages</message-bundle>
+
+        <!--<resource-handler>me.kolinger.pro3.invoices.resources.ResourceHandlerWrapper</resource-handler>-->
+
+        <!--<system-event-listener>-->
+            <!--<system-event-listener-class>me.kolinger.pro3.invoices.resources.ResourceSystemEventListener</system-event-listener-class>-->
+            <!--<system-event-class>javax.faces.event.PreRenderViewEvent</system-event-class>-->
+        <!--</system-event-listener>-->
     </application>
 
     <lifecycle>
