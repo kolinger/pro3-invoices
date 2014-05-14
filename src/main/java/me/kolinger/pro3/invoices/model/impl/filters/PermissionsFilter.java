@@ -13,7 +13,7 @@ public class PermissionsFilter extends AbstractFilter {
     @Property(name = "company", expression = Expression.EQUAL)
     private Company company;
 
-    @Property(name = "manager.username", expression = Expression.LIKE)
+    @Property(name = "manager.username", expression = Expression.FULLTEXT)
     private String manager;
 
     public Company getCompany() {

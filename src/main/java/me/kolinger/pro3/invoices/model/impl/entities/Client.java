@@ -3,11 +3,7 @@ package me.kolinger.pro3.invoices.model.impl.entities;
 import me.kolinger.pro3.invoices.model.DeletableEntity;
 import org.hibernate.annotations.Formula;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Tomáš Kolinger <tomas@kolinger.name>
@@ -31,7 +27,7 @@ public class Client extends DeletableEntity {
     @Column(nullable = false, length = 5)
     private String zip;
 
-    @Formula(value="street || ' ' || city || ' ' || zip")
+    @Formula(value = "street || ' ' || city || ' ' || zip")
     private String address;
 
     @Column(length = 8)

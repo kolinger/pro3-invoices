@@ -2,10 +2,7 @@ package me.kolinger.pro3.invoices.model;
 
 import me.kolinger.pro3.invoices.common.LoggedObject;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,7 +12,7 @@ import java.io.Serializable;
 public abstract class IdentifiedEntity extends LoggedObject implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "bigserial")
     private Long id;
 
     public Long getId() {

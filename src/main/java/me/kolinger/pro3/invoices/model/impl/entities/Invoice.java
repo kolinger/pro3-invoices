@@ -1,20 +1,6 @@
 package me.kolinger.pro3.invoices.model.impl.entities;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Index;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,11 +14,10 @@ import java.util.List;
 public class Invoice implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoice_seq")
-    @SequenceGenerator(name = "invoice_seq", sequenceName = "invoice_seq", initialValue = 1000000000, allocationSize = 1)
+    @Column(columnDefinition = "bigserial")
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "invoice", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "invoice", fetch = FetchType.LAZY)
     private List<InvoiceProduct> products = new ArrayList<InvoiceProduct>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
@@ -57,7 +42,6 @@ public class Invoice implements Serializable {
     private String comment;
 
     @Column(nullable = false)
-    @Index(name = "invoice_deleted_idx")
     private Boolean deleted = false;
 
     public Long getId() {

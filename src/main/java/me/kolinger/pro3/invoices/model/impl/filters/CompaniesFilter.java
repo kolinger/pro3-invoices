@@ -11,16 +11,16 @@ import org.hibernate.criterion.Restrictions;
  */
 public class CompaniesFilter extends AbstractFilter {
 
-    @Property(name = "name", expression = Expression.LIKE)
+    @Property(name = "name", expression = Expression.FULLTEXT)
     private String name;
 
-    @Property(name = "address", expression = Expression.CRITERIA)
+    @Property(name = "address", expression = Expression.FULLTEXT)
     private String address;
 
-    @Property(name = "companyIn", expression = Expression.LIKE)
+    @Property(name = "companyIn", expression = Expression.LIKE_PARTIAL)
     private String companyIn;
 
-    @Property(name = "vatId", expression = Expression.LIKE)
+    @Property(name = "vatId", expression = Expression.LIKE_PARTIAL)
     private String vatId;
 
     public String getName() {
@@ -53,15 +53,5 @@ public class CompaniesFilter extends AbstractFilter {
 
     public void setVatId(String vatId) {
         this.vatId = vatId;
-    }
-
-    public void applyAddressCriteria(Criteria criteria, Object value) {
-        if (value == null) {
-            return;
-        }
-
-        String realValue = '%' + value.toString() + '%';
-
-        criteria.add(Restrictions.or(Restrictions.like("address", realValue)));
     }
 }

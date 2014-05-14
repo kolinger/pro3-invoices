@@ -1,13 +1,6 @@
 package me.kolinger.pro3.invoices.model.impl.entities;
 
-import org.hibernate.annotations.Index;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,9 +8,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "permissions")
-@org.hibernate.annotations.Table(appliesTo = "permissions", indexes = {
-    @Index(name="permission_invoices_idx", columnNames = {"company_id", "manager_id", "roleinvoices"})
-})
 public class Permission implements Serializable {
 
     @Id

@@ -2,13 +2,8 @@ package me.kolinger.pro3.invoices.model.impl.entities;
 
 import me.kolinger.pro3.invoices.model.DeletableEntity;
 import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.Index;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +38,7 @@ public class Company extends DeletableEntity {
     @Column(nullable = false, length = 5)
     private String zip;
 
-    @Formula(value="street || ' ' || city || ' ' || zip")
+    @Formula(value = "street || ' ' || city || ' ' || zip")
     private String address;
 
     @Column(nullable = false)

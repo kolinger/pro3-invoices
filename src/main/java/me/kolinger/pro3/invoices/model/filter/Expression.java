@@ -9,6 +9,8 @@ public enum Expression {
     NOT_EQUAL,
 
     LIKE,
+    LIKE_PARTIAL,
+    FULLTEXT,
 
     GREATER,
     GREATER_OR_EQUAL,

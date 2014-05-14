@@ -1,5 +1,6 @@
 package me.kolinger.pro3.invoices.model.filter;
 
+import me.kolinger.pro3.invoices.model.hibernate.ExtendedRestrictions;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
@@ -33,9 +34,15 @@ public abstract class AbstractFilter extends LoggedObject {
             Property property = field.getAnnotation(Property.class);
             if (property != null) {
                 try {
-                    if (getScalarValue(field) == null) {
+                    Object value = getScalarValue(field);
+                    if (value == null) {
                         continue;
                     }
+
+                    if (value instanceof String && value.toString().trim().length() == 0) {
+                        continue;
+                    }
+
                     Criterion criterion = createCriterion(field, property, criteria);
                     if (criterion != null) {
                         criteria.add(criterion);
@@ -65,6 +72,14 @@ public abstract class AbstractFilter extends LoggedObject {
         } else if (property.expression() == Expression.LIKE) {
             Object value = getScalarValue(field);
             criterion = Restrictions.like(property.name(), "%" + value.toString() + "%");
+
+        } else if (property.expression() == Expression.LIKE_PARTIAL) {
+            Object value = getScalarValue(field);
+            criterion = Restrictions.like(property.name(), value.toString() + "%");
+
+        } else if (property.expression() == Expression.FULLTEXT) {
+            Object value = getScalarValue(field);
+            criterion = ExtendedRestrictions.search(property.name(), value);
 
         } else if (property.expression() == Expression.GREATER) {
             Object value = getScalarValue(field);

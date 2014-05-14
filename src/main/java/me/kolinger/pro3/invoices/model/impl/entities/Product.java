@@ -2,11 +2,7 @@ package me.kolinger.pro3.invoices.model.impl.entities;
 
 import me.kolinger.pro3.invoices.model.DeletableEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**

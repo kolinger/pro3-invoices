@@ -19,7 +19,7 @@ public class PaymentsFilter extends AbstractFilter {
     @Property(name = "invoice.id", expression = Expression.EQUAL)
     private Long variableSymbol;
 
-    @Property(name = "client.name", expression = Expression.LIKE)
+    @Property(name = "client.name", expression = Expression.FULLTEXT)
     private String client;
 
     @Property(name = "amount", expression = Expression.EQUAL)

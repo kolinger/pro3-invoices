@@ -23,7 +23,7 @@ public class InvoicesFilter extends AbstractFilter {
     @Property(name = "id", expression = Expression.EQUAL)
     private Long id;
 
-    @Property(name = "client.name", expression = Expression.LIKE)
+    @Property(name = "client.name", expression = Expression.FULLTEXT)
     private String client;
 
     @Property(name = "type", expression = Expression.EQUAL)

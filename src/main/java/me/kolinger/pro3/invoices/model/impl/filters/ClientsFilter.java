@@ -15,16 +15,16 @@ public class ClientsFilter extends AbstractFilter {
     @Property(name = "company", expression = Expression.EQUAL)
     private Company company;
 
-    @Property(name = "name", expression = Expression.LIKE)
+    @Property(name = "name", expression = Expression.FULLTEXT)
     private String name;
 
-    @Property(name = "address", expression = Expression.CRITERIA)
+    @Property(name = "address", expression = Expression.FULLTEXT)
     private String address;
 
-    @Property(name = "companyIn", expression = Expression.LIKE)
+    @Property(name = "companyIn", expression = Expression.LIKE_PARTIAL)
     private String companyIn;
 
-    @Property(name = "vatId", expression = Expression.LIKE)
+    @Property(name = "vatId", expression = Expression.LIKE_PARTIAL)
     private String vatId;
 
     public Company getCompany() {
