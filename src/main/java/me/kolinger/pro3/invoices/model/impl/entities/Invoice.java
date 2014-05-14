@@ -15,6 +15,7 @@ public class Invoice implements Serializable {
 
     @Id
     @Column(columnDefinition = "bigserial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "invoice", fetch = FetchType.LAZY)

@@ -13,6 +13,7 @@ public abstract class IdentifiedEntity extends LoggedObject implements Serializa
 
     @Id
     @Column(columnDefinition = "bigserial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
