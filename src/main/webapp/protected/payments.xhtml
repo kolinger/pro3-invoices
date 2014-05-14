@@ -41,10 +41,6 @@
                     <p:inputText value="#{paymentsBean.filter.client}" label="#{msg['protected.payments.client']}" />
                 </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.payments.amount']}">
-                    <p:inputText value="#{paymentsBean.filter.amount}" label="#{msg['protected.payments.amount']}" />
-                </p:outputLabel>
-
                 <p:outputLabel value="#{msg['protected.payments.date_from']}">
                     <p:calendar value="#{paymentsBean.filter.dateFrom}"
                                 label="#{msg['protected.payments.date_from']}"
@@ -79,7 +75,7 @@
                     <h:outputText value="#{row.invoice.client.name}" />
                 </p:column>
     
-                <p:column headerText="#{msg['protected.payments.amount']}">
+                <p:column sortBy="#{row.amount}" headerText="#{msg['protected.payments.amount']}">
                     <h:outputText value="#{row.amount} Kč" />
                 </p:column>
     

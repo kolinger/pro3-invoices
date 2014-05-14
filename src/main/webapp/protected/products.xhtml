@@ -35,14 +35,6 @@
                     <p:inputText value="#{productsBean.filter.name}" label="#{msg['protected.products.name']}" />
                 </p:outputLabel>
 
-                <p:outputLabel value="#{msg['protected.products.price']}">
-                    <p:inputText value="#{productsBean.filter.price}" label="#{msg['protected.products.price']}" />
-                </p:outputLabel>
-
-                <p:outputLabel value="#{msg['protected.products.tax']}">
-                    <p:inputText value="#{productsBean.filter.tax}" label="#{msg['protected.products.tax']}" />
-                </p:outputLabel>
-
                 <p:commandButton value="#{msg['layout.crud.apply']}" update=":list messages" />
                 <p:commandButton value="#{msg['layout.crud.clean']}" update=":list :filter :buttons"
                                  action="#{productsBean.cleanFilter}" />
